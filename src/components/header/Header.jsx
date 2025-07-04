@@ -1,5 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  FaHeart,
+  FaHome,
+  FaImages,
+  FaInfoCircle,
+  FaPhone,
+  FaTools,
+} from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import logopng from "../../assets/images/logopng.png";
 import "./Header.scss";
@@ -8,13 +16,18 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Close menu when location changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
   const navItems = [
-    { name: "Home", path: "/", icon: "🏠" },
-    { name: "About Us", path: "/about", icon: "ℹ️" },
-    { name: "Services", path: "/services", icon: "🛠️" },
-    { name: "Gallery", path: "/gallery", icon: "📸" },
-    { name: "Contact", path: "/contact", icon: "📞" },
-    { name: "Donate", path: "/donate", icon: "❤️" },
+    { name: "Home", path: "/", icon: FaHome },
+    { name: "About Us", path: "/about", icon: FaInfoCircle },
+    { name: "Services", path: "/services", icon: FaTools },
+    { name: "Gallery", path: "/gallery", icon: FaImages },
+    { name: "Contact", path: "/contact", icon: FaPhone },
+    { name: "Donate", path: "/donate", icon: FaHeart },
   ];
 
   const toggleMenu = () => {
@@ -59,39 +72,48 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {navItems.map((item, index) => (
-              <motion.li
-                key={item.name}
-                className="header__nav-item"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-              >
-                <Link
-                  to={item.path}
-                  className={`header__nav-link ${
-                    location.pathname === item.path
-                      ? "header__nav-link--active"
-                      : ""
-                  }`}
-                  onClick={closeMenu}
+            {navItems.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <motion.li
+                  key={item.name}
+                  className="header__nav-item"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                 >
-                  <span className="header__nav-icon">{item.icon}</span>
-                  <span className="header__nav-text">{item.name}</span>
-                  <motion.div
-                    className="header__nav-indicator"
-                    layoutId="nav-indicator"
-                    initial={false}
-                    animate={
+                  <Link
+                    to={item.path}
+                    className={`header__nav-link ${
                       location.pathname === item.path
-                        ? { opacity: 1, scale: 1 }
-                        : { opacity: 0, scale: 0 }
-                    }
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                </Link>
-              </motion.li>
-            ))}
+                        ? "header__nav-link--active"
+                        : ""
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    <span className="header__nav-icon">
+                      <IconComponent />
+                    </span>
+                    <span className="header__nav-text">{item.name}</span>
+                    <motion.div
+                      className="header__nav-indicator"
+                      layoutId="nav-indicator"
+                      initial={false}
+                      animate={
+                        location.pathname === item.path
+                          ? { opacity: 1, scale: 1 }
+                          : { opacity: 0, scale: 0 }
+                      }
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                    />
+                  </Link>
+                </motion.li>
+              );
+            })}
           </motion.ul>
         </nav>
 
@@ -131,28 +153,33 @@ const Header = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                {navItems.map((item, index) => (
-                  <motion.li
-                    key={item.name}
-                    className="header__nav-item header__nav-item--mobile"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                  >
-                    <Link
-                      to={item.path}
-                      className={`header__nav-link header__nav-link--mobile ${
-                        location.pathname === item.path
-                          ? "header__nav-link--active"
-                          : ""
-                      }`}
-                      onClick={closeMenu}
+                {navItems.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <motion.li
+                      key={item.name}
+                      className="header__nav-item header__nav-item--mobile"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                     >
-                      <span className="header__nav-icon">{item.icon}</span>
-                      <span className="header__nav-text">{item.name}</span>
-                    </Link>
-                  </motion.li>
-                ))}
+                      <Link
+                        to={item.path}
+                        className={`header__nav-link header__nav-link--mobile ${
+                          location.pathname === item.path
+                            ? "header__nav-link--active"
+                            : ""
+                        }`}
+                        onClick={closeMenu}
+                      >
+                        <span className="header__nav-icon">
+                          <IconComponent />
+                        </span>
+                        <span className="header__nav-text">{item.name}</span>
+                      </Link>
+                    </motion.li>
+                  );
+                })}
               </motion.ul>
             </motion.nav>
           )}
