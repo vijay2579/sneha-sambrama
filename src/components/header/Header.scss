@@ -1,42 +1,5 @@
-// Variables
-$primary-color: #667eea;
-$secondary-color: #764ba2;
-$accent-color: #ff6b6b;
-$text-primary: #2d3748;
-$text-secondary: #718096;
-$background-light: #f8f4ff;
-$background-lighter: #f0e6ff;
-$white: #ffffff;
-$shadow-light: rgba(102, 126, 234, 0.1);
-$shadow-medium: rgba(102, 126, 234, 0.2);
-$border-radius: 12px;
-$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-// Mixins
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-@mixin glass-effect {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-@mixin gradient-text {
-  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+// Import variables and mixins
+@import '../../styles/variables.scss';
 
 // Header Component
 .header {
@@ -44,22 +7,22 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+  z-index: $z-index-fixed;
+  @include gradient-bg-light;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px $shadow-light;
+  @include shadow-purple;
 
   &__container {
-    max-width: 1400px;
+    max-width: $container-max-width;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 $container-padding;
     @include flex-between;
     min-height: 80px;
     position: relative;
 
-    @media (max-width: 768px) {
-      padding: 0 1rem;
+    @include responsive(md) {
+      padding: 0 $spacing-md;
       min-height: 70px;
     }
   }
@@ -68,10 +31,9 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   &__logo {
     &-link {
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      transition: $transition;
+      @include flex-start;
+      gap: $spacing-md;
+      transition: $transition-normal;
 
       &:hover {
         transform: translateY(-2px);
@@ -79,24 +41,22 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-image {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-center;
     }
 
     &-img {
       height: 50px;
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.2));
-      transition: $transition;
+      filter: drop-shadow(0 2px 8px $shadow-medium);
+      transition: $transition-normal;
 
       &:hover {
         transform: scale(1.05);
-        filter: drop-shadow(0 4px 12px rgba(102, 126, 234, 0.3));
+        filter: drop-shadow(0 4px 12px $shadow-dark);
       }
 
-      @media (max-width: 768px) {
+      @include responsive(md) {
         height: 40px;
       }
     }
@@ -108,36 +68,36 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-primary {
-      font-size: 1.8rem;
-      font-weight: 800;
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-extrabold;
       @include gradient-text;
       letter-spacing: -0.5px;
 
-      @media (max-width: 768px) {
-        font-size: 1.4rem;
+      @include responsive(md) {
+        font-size: $font-size-2xl;
       }
     }
 
     &-secondary {
-      font-size: 1.6rem;
-      font-weight: 600;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
       color: $secondary-color;
       margin-top: -5px;
 
-      @media (max-width: 768px) {
-        font-size: 1.2rem;
+      @include responsive(md) {
+        font-size: $font-size-xl;
       }
     }
 
     &-badge {
-      font-size: 0.7rem;
+      font-size: $font-size-xs;
       color: $text-secondary;
-      font-weight: 500;
+      font-weight: $font-weight-medium;
       margin-top: 2px;
       text-transform: uppercase;
       letter-spacing: 1px;
 
-      @media (max-width: 768px) {
+      @include responsive(md) {
         font-size: 0.65rem;
       }
     }
@@ -146,7 +106,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   // Desktop Navigation
   &__nav {
     &--desktop {
-      @media (max-width: 1024px) {
+      @include responsive(lg) {
         display: none;
       }
     }
@@ -156,13 +116,13 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       list-style: none;
       margin: 0;
       padding: 0;
-      gap: 0.5rem;
+      gap: $spacing-sm;
       align-items: center;
 
       &--mobile {
         flex-direction: column;
-        gap: 1rem;
-        padding: 2rem 0;
+        gap: $spacing-md;
+        padding: $spacing-xl 0;
       }
     }
 
@@ -175,51 +135,66 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.25rem;
+      @include flex-start;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-lg;
       text-decoration: none;
       color: $text-primary;
-      font-weight: 500;
-      font-size: 1rem;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-base;
       border-radius: $border-radius;
-      transition: $transition;
+      transition: $transition-normal;
       position: relative;
-      @include glass-effect;
+      background: transparent;
+      border: none;
 
       &:hover {
         background: rgba($primary-color, 0.1);
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px $shadow-medium;
+        @include shadow-lg;
+
+        .header__nav-icon {
+          color: $primary-color;
+        }
       }
 
       &--active {
-        background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+        @include gradient-bg;
         color: $white;
-        box-shadow: 0 8px 25px $shadow-medium;
+        @include shadow-lg;
 
         .header__nav-icon {
-          filter: brightness(0) invert(1);
+          color: $white;
         }
       }
 
       &--mobile {
         width: 100%;
-        padding: 1rem 1.5rem;
+        padding: $spacing-md $spacing-lg;
         border-radius: $border-radius;
-        font-size: 1.1rem;
+        font-size: $font-size-lg;
+        background: transparent;
+        border: none;
+
+        &:hover {
+          background: rgba($primary-color, 0.1);
+
+          .header__nav-icon {
+            color: $primary-color;
+          }
+        }
       }
     }
 
     &-icon {
-      font-size: 1.2rem;
-      transition: $transition;
+      font-size: $font-size-xl;
+      transition: $transition-normal;
+      color: $secondary-color;
     }
 
     &-text {
-      font-weight: 500;
-      transition: $transition;
+      font-weight: $font-weight-medium;
+      transition: $transition-normal;
     }
 
     &-indicator {
@@ -241,12 +216,13 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: $spacing-sm;
     border-radius: $border-radius;
-    @include glass-effect;
-    transition: $transition;
+    background: transparent;
+    border: none;
+    transition: $transition-normal;
 
-    @media (max-width: 1024px) {
+    @include responsive(lg) {
       display: block;
     }
 
@@ -269,7 +245,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       height: 2px;
       background: $text-primary;
       border-radius: 2px;
-      transition: $transition;
+      transition: $transition-normal;
       transform-origin: center;
     }
 
@@ -297,14 +273,14 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     right: 0;
     width: 300px;
     height: 100vh;
-    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+    @include gradient-bg-light;
     backdrop-filter: blur(20px);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: -8px 0 32px $shadow-light;
-    z-index: 1001;
-    padding: 2rem 1rem;
+    @include shadow-purple;
+    z-index: $z-index-modal;
+    padding: $spacing-xl $spacing-md;
 
-    @media (max-width: 480px) {
+    @include responsive(sm) {
       width: 280px;
     }
   }
@@ -318,49 +294,28 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100vh;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
-    z-index: 1000;
-  }
-}
-
-// Animation Classes
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+    z-index: $z-index-modal-backdrop;
   }
 }
 
 // Responsive Design
-@media (max-width: 768px) {
+@include responsive(md) {
   .header {
     &__container {
-      padding: 0 1rem;
+      padding: 0 $spacing-md;
     }
 
     &__logo {
       &-link {
-        gap: 0.75rem;
+        gap: $spacing-sm;
       }
 
       &-primary {
-        font-size: 1.4rem;
+        font-size: $font-size-2xl;
       }
 
       &-secondary {
-        font-size: 1.2rem;
+        font-size: $font-size-xl;
       }
 
       &-badge {
@@ -370,7 +325,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-@media (max-width: 480px) {
+@include responsive(sm) {
   .header {
     &__nav--mobile {
       width: 100vw;
@@ -378,13 +333,13 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &__nav-link--mobile {
-      padding: 1.25rem 1.5rem;
-      font-size: 1.2rem;
+      padding: $spacing-lg $spacing-lg;
+      font-size: $font-size-xl;
     }
 
     &__logo {
       &-link {
-        gap: 0.5rem;
+        gap: $spacing-sm;
       }
 
       &-img {
@@ -392,11 +347,11 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       &-primary {
-        font-size: 1.2rem;
+        font-size: $font-size-xl;
       }
 
       &-secondary {
-        font-size: 1rem;
+        font-size: $font-size-lg;
       }
 
       &-badge {

@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logopng from "../../assets/logopng.png";
+import logopng from "../../assets/images/logopng.png";
 import "./Header.scss";
 
 const Header = () => {
