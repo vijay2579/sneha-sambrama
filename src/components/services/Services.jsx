@@ -17,13 +17,13 @@ const Services = () => {
   const services = [
     {
       id: 1,
-      title: "Udyoga Mela",
+      title: "Job Fair",
       subtitle: "Employment Opportunities for All",
       description:
         "Organizing job fairs and employment melas to connect job seekers with potential employers. We facilitate skill development workshops, provide career counseling, and create networking opportunities to help individuals find meaningful employment and build sustainable careers.",
       icon: FaGraduationCap,
       color: "#e74c3c",
-      stats: "400+ Jobs Created",
+      stats: "400+ Jobs Provided",
       carouselImages: [
         "/src/assets/images/udyogamela/2.jpeg",
         "/src/assets/images/udyogamela/4.jpeg",

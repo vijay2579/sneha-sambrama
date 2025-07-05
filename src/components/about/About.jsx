@@ -232,7 +232,7 @@ const About = () => {
                 }}
               >
                 <div className="about__team-img-wrapper about__team-img-wrapper--large">
-                  <img src={tejasvi} alt="Tejasvi" />
+                  <img src={tejasvi} alt="Shri Tejasvi Kattimani T R" />
                 </div>
                 <div className="about__team-info about__team-info--large">
                   <div className="about__team-name">
@@ -244,7 +244,11 @@ const About = () => {
               {/* Grid of smaller directors below */}
               <div className="about__team-small-grid">
                 {[
-                  { img: director1, name: "Director 1", role: "Board Member" },
+                  {
+                    img: director1,
+                    name: "Shri Bheerappa",
+                    role: "Board Member",
+                  },
                   { img: director2, name: "Director 2", role: "Board Member" },
                   { img: director3, name: "Director 3", role: "Board Member" },
                   { img: director4, name: "Director 4", role: "Board Member" },
@@ -253,11 +257,7 @@ const About = () => {
                   { img: director7, name: "Director 7", role: "Board Member" },
                   { img: director8, name: "Director 8", role: "Board Member" },
                   { img: director9, name: "Director 9", role: "Board Member" },
-                  {
-                    img: director10,
-                    name: "Director 10",
-                    role: "Board Member",
-                  },
+                  { img: director10, name: "Shri Umesh D", role: "Director" },
                 ].map((member, idx) => (
                   <motion.div
                     className="about__team-tile"
