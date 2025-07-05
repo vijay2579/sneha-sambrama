@@ -245,19 +245,55 @@ const About = () => {
               <div className="about__team-small-grid">
                 {[
                   {
+                    img: director4,
+                    name: "Sri. Shivakumar H. M.",
+                    role: "Vice President",
+                  },
+                  {
+                    img: director5,
+                    name: "Sri. Ramanagouda D. B.",
+                    role: "Secretary",
+                  },
+                  {
+                    img: director9,
+                    name: "Sri. Pakkirappa R. B.",
+                    role: "Joint Secretary",
+                  },
+                  {
+                    img: director8,
+                    name: "Sri. Vishwanathaih",
+                    role: "Treasurer",
+                  },
+                  {
+                    img: director6,
+                    name: "Sri. G. J. Mahadevagouda",
+                    role: "Director",
+                  },
+                  {
+                    img: director10,
+                    name: "Sri. Umesh D.",
+                    role: "Director",
+                  },
+                  {
                     img: director1,
                     name: "Shri. Bheerappa",
-                    role: "Board Member",
+                    role: "Director",
                   },
-                  { img: director2, name: "Smt. K S Sarala", role: "Director" },
-                  { img: director3, name: "Smt. Geetha", role: "Director" },
-                  { img: director4, name: "Director 4", role: "Board Member" },
-                  { img: director5, name: "Director 5", role: "Board Member" },
-                  { img: director6, name: "Director 6", role: "Board Member" },
-                  { img: director7, name: "Director 7", role: "Board Member" },
-                  { img: director8, name: "Director 8", role: "Board Member" },
-                  { img: director9, name: "Director 9", role: "Board Member" },
-                  { img: director10, name: "Shri. Umesh D", role: "Director" },
+                  {
+                    img: director7,
+                    name: "Sri. Basavaraj Reddy",
+                    role: "Director",
+                  },
+                  {
+                    img: director2,
+                    name: "Smt. Geetha",
+                    role: "Director",
+                  },
+                  {
+                    img: director3,
+                    name: "Smt. K. S. Sarala",
+                    role: "Director",
+                  },
                 ].map((member, idx) => (
                   <motion.div
                     className="about__team-tile"
