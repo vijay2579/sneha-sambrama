@@ -22,9 +22,8 @@
     }
   
     @include responsive(sm) {
-      height: unset;
-      min-height: 60vh;
-      padding: $spacing-lg 0;
+      height: 70vh;
+      margin: 10px;
     }
   
     &__container {
