@@ -25,11 +25,11 @@
     width: 80px;
     height: 80px;
     border-radius: $border-radius-full;
-    @include gradient-bg;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
     border: none;
     cursor: pointer;
     position: relative;
-    @include shadow-lg;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
     transition: $transition-normal;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -46,7 +46,7 @@
 
     &:hover {
       transform: translateY(-3px);
-      @include shadow-xl;
+      box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
     }
 
     &:active {
@@ -56,9 +56,10 @@
 
   &__icon {
     font-size: $font-size-xl;
-    color: $white;
+    color: #FFF;
     z-index: 2;
     position: relative;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 
     @include responsive(md) {
       font-size: $font-size-lg;
@@ -147,12 +148,12 @@
 @include responsive(sm) {
   .donate-float {
     &__button {
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
     }
 
     &:hover {
       .donate-float__button {
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
       }
     }
   }

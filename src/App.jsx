@@ -4,6 +4,7 @@ import About from "./components/about/About";
 import Contact from "./components/contact/Contact";
 import Donate from "./components/donate/Donate";
 import DonateFloat from "./components/donate/DonateFloat";
+import Footer from "./components/footer/Footer";
 import Gallery from "./components/gallery/Gallery";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
@@ -52,6 +53,7 @@ const App = () => {
         </section>
       </main>
       <DonateFloat onDonateClick={scrollToDonate} />
+      <Footer />
     </div>
   );
 };

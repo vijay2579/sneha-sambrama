@@ -159,17 +159,17 @@
       font-family: inherit;
 
       &:hover {
-        background: rgba($primary-color, 0.1);
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
         transform: translateY(-2px);
         @include shadow-lg;
 
         .header__nav-icon {
-          color: $primary-color;
+          color: $white;
         }
       }
 
       &--active {
-        @include gradient-bg;
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
         color: $white;
         @include shadow-lg;
 
@@ -187,15 +187,15 @@
         border: none;
 
         &:hover {
-          background: rgba($primary-color, 0.1);
+          background: linear-gradient(135deg, #ff6b6b, #ee5a24);
 
           .header__nav-icon {
-            color: $primary-color;
+            color: $white;
           }
         }
 
         &.header__nav-link--active {
-          @include gradient-bg;
+          background: linear-gradient(135deg, #ff6b6b, #ee5a24);
           color: $white;
           @include shadow-lg;
 
