@@ -93,7 +93,7 @@ const About = () => {
               is built on the values of
               <span className="highlight"> selfless service</span> and{" "}
               <span className="highlight">community care</span>. Established in
-              2010, our foundation has been actively involved in empowering
+              2021, our foundation has been actively involved in empowering
               underprivileged children with education, healthcare support, food
               distribution, and various social welfare activities.
             </p>
