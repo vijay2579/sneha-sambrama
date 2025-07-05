@@ -170,6 +170,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr;
       gap: $spacing-md;
+      padding: 0;
     }
   }
 
@@ -310,6 +311,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr;
       gap: $spacing-md;
+      padding: 0;
     }
   }
 
@@ -752,6 +754,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr 1fr;
       gap: $spacing-sm;
+      padding: 0;
     }
   }
 
@@ -783,6 +786,7 @@
       }
       @include responsive(sm) {
         margin-top: $spacing-md;
+        padding: 0;
       }
     }
   }
