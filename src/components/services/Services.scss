@@ -116,37 +116,7 @@
 
     @include responsive(sm) {
       border-radius: $border-radius-sm;
-      padding: $spacing-md;
       text-align: center;
-    }
-
-    &:hover {
-      @include shadow-xl;
-      border-color: var(--service-color);
-      
-      .services__tile-bg {
-        transform: scale(1.1);
-        
-        &::after {
-          opacity: 1;
-        }
-      }
-      
-      .services__tile-icon {
-        transform: scale(1.2) rotate(10deg);
-        color: $primary-color;
-        filter: drop-shadow(0 6px 12px rgba($black, 0.6));
-      }
-      
-      .services__tile-title {
-        color: var(--service-color);
-        transform: translateY(-2px);
-      }
-      
-      .services__tile-stats {
-        color: var(--service-color);
-        font-weight: $font-weight-bold;
-      }
     }
   }
 
@@ -204,6 +174,34 @@
     }
   }
 
+  // New img element styles for better mobile support
+  &__tile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  // Fallback background for when img fails to load
+  &__tile-fallback {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: none; // Hidden by default, shown when img fails
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
   &__tile-overlay {
     position: absolute;
     top: 0;
@@ -232,6 +230,11 @@
 
     .services__tile:hover & {
       opacity: 1;
+    }
+
+    @include responsive(sm) {
+      opacity: 1;
+      padding: 0 $spacing-xs;
     }
   }
 
@@ -290,6 +293,11 @@
 
     .services__tile:hover & {
       opacity: 1;
+    }
+
+    @include responsive(sm) {
+      opacity: 1;
+      bottom: $spacing-xs;
     }
   }
 
@@ -634,12 +642,6 @@
 // Responsive optimizations
 @include responsive(md) {
   .services {
-    &__tile {
-      &:hover {
-        transform: translateY(-5px);
-      }
-    }
-
     &__carousel-nav {
       padding: 0 $spacing-md;
     }
@@ -648,12 +650,6 @@
 
 @include responsive(sm) {
   .services {
-    &__tile {
-      &:hover {
-        transform: translateY(-3px);
-      }
-    }
-
     &__carousel-nav {
       padding: 0 $spacing-sm;
     }
@@ -680,10 +676,6 @@
   .services {
     &__tile {
       transition: none;
-
-      &:hover {
-        transform: none;
-      }
     }
 
     &__tile-bg {
@@ -692,6 +684,115 @@
 
     &__tile-icon {
       transition: none;
+    }
+  }
+} 
+
+// Mobile-specific fixes for service tiles
+@include responsive(sm) {
+  .services {
+    &__tile {
+      // Ensure proper spacing and visibility on mobile
+      margin-bottom: $spacing-md;
+      
+      // Make carousel controls always visible on mobile
+      .services__tile-carousel-controls {
+        opacity: 1 !important;
+        pointer-events: all;
+      }
+      
+      // Make carousel indicators always visible on mobile
+      .services__tile-carousel-indicators {
+        opacity: 1 !important;
+        pointer-events: all;
+      }
+      
+      // Ensure images are properly displayed
+      .services__tile-bg {
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 160px;
+      }
+    }
+    
+    // Ensure carousel navigation is properly sized for mobile
+    &__nav-btn {
+      width: 35px !important;
+      height: 35px !important;
+      font-size: $font-size-sm !important;
+    }
+  }
+} 
+
+// New image styles for better mobile support
+.services {
+  &__tile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &__tile-fallback {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: none; // Hidden by default, shown when img fails
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+} 
+
+// Additional mobile debugging styles
+@include responsive(sm) {
+  .services {
+    &__tile-image {
+      // Ensure the image container is properly sized
+      min-height: 160px !important;
+      height: 160px !important;
+      overflow: hidden !important;
+    }
+    
+    &__tile-bg {
+      // Ensure background container is properly sized
+      min-height: 160px !important;
+      height: 100% !important;
+    }
+    
+    &__tile-img {
+      // Force image display on mobile
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      z-index: 0 !important;
+    }
+    
+    &__tile-fallback {
+      // Ensure fallback is properly positioned
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      z-index: 0 !important;
     }
   }
 } 

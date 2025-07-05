@@ -13,7 +13,7 @@ const Services = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [serviceCarousels, setServiceCarousels] = useState({});
 
-  // Service data structure with relative images and carousel images
+  // Service data structure with dynamic image imports
   const services = [
     {
       id: 1,
@@ -25,12 +25,12 @@ const Services = () => {
       color: "#e74c3c",
       stats: "400+ Jobs Provided",
       carouselImages: [
-        "/src/assets/images/udyogamela/2.jpeg",
-        "/src/assets/images/udyogamela/4.jpeg",
-        "/src/assets/images/udyogamela/5.jpeg",
-        "/src/assets/images/udyogamela/6.jpeg",
-        "/src/assets/images/udyogamela/p2.jpeg",
-        "/src/assets/images/udyogamela/price.jpeg",
+        "/images/udyogamela/2.jpeg",
+        "/images/udyogamela/4.jpeg",
+        "/images/udyogamela/5.jpeg",
+        "/images/udyogamela/6.jpeg",
+        "/images/udyogamela/p2.jpeg",
+        "/images/udyogamela/price.jpeg",
       ],
     },
     {
@@ -43,12 +43,12 @@ const Services = () => {
       color: "#e74c3c",
       stats: "1000+ Health Check-ups",
       carouselImages: [
-        "/src/assets/images/healthcare/c3.jpeg",
-        "/src/assets/images/healthcare/c4.jpeg",
-        "/src/assets/images/healthcare/c5.jpeg",
-        "/src/assets/images/healthcare/camp1.jpeg",
-        "/src/assets/images/healthcare/camp2.jpeg",
-        "/src/assets/images/healthcare/k4.jpeg",
+        "/images/healthcare/c3.jpeg",
+        "/images/healthcare/c4.jpeg",
+        "/images/healthcare/c5.jpeg",
+        "/images/healthcare/camp1.jpeg",
+        "/images/healthcare/camp2.jpeg",
+        "/images/healthcare/k4.jpeg",
       ],
     },
     {
@@ -61,8 +61,8 @@ const Services = () => {
       color: "#e74c3c",
       stats: "300+ Blood Units Collected",
       carouselImages: [
-        "/src/assets/images/blooddonation/hero3.jpeg",
-        "/src/assets/images/blooddonation/hero4.jpeg",
+        "/images/blooddonation/hero3.jpeg",
+        "/images/blooddonation/hero4.jpeg",
       ],
     },
   ];
@@ -164,16 +164,6 @@ const Services = () => {
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
-    hover: {
-      y: -15,
-      scale: 1.08,
-      rotateY: 8,
-      rotateX: -5,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
   };
 
   return (
@@ -207,22 +197,58 @@ const Services = () => {
               const currentImageIndex = serviceCarousels[service.id] || 0;
               const currentImage = service.carouselImages[currentImageIndex];
 
+              // Debug logging for mobile
+              console.log(
+                `Service ${service.id}: Loading image ${
+                  currentImageIndex + 1
+                }/${service.carouselImages.length}`,
+                currentImage
+              );
+
               return (
                 <motion.div
                   key={service.id}
                   className="services__tile"
                   variants={tileVariants}
-                  whileHover="hover"
                   style={{ "--service-color": service.color }}
                 >
                   <div className="services__tile-image">
                     <div
                       className="services__tile-bg"
                       style={{
-                        backgroundImage: `url(${currentImage})`,
-                        backgroundColor: service.color + "20", // Fallback color
+                        backgroundColor: service.color + "40", // Enhanced fallback color
                       }}
                     >
+                      {/* Add actual img element for better mobile support */}
+                      <img
+                        src={currentImage}
+                        alt={`${service.title} - Image ${
+                          currentImageIndex + 1
+                        }`}
+                        className="services__tile-img"
+                        onLoad={() =>
+                          console.log(
+                            `Image loaded successfully: ${currentImage}`
+                          )
+                        }
+                        onError={(e) => {
+                          console.error(
+                            `Failed to load image: ${currentImage}`
+                          );
+                          e.target.style.display = "none";
+                          const fallback = e.target.nextElementSibling;
+                          if (fallback) {
+                            fallback.style.display = "block";
+                          }
+                        }}
+                      />
+                      <div
+                        className="services__tile-fallback"
+                        style={{
+                          backgroundImage: `url(${currentImage})`,
+                        }}
+                      />
+
                       <div className="services__tile-overlay">
                         <div className="services__tile-icon">
                           <IconComponent />

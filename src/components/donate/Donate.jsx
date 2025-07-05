@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaArrowRight,
   FaCheck,
@@ -15,7 +15,18 @@ import { BANK_DETAILS } from "../../utils";
 import "./Donate.scss";
 
 const Donate = () => {
+  const [expandedMethod, setExpandedMethod] = useState(null);
   const [copiedField, setCopiedField] = useState(null);
+  const [statsHovered, setStatsHovered] = useState(false);
+
+  // Set stats to hovered state after component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStatsHovered(true);
+    }, 1000); // Apply hover effects 1 second after page load
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const paymentMethods = [
     {
@@ -73,6 +84,15 @@ const Donate = () => {
       transition: {
         duration: 0.6,
         ease: "easeOut",
+      },
+    },
+    hovered: {
+      opacity: 1,
+      y: -5,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 0.5,
       },
     },
   };
@@ -305,15 +325,27 @@ const Donate = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <motion.div className="donate__stat-item" variants={itemVariants}>
+          <motion.div
+            className={`donate__stat-item ${
+              statsHovered ? "donate__stat-item--hovered" : ""
+            }`}
+            variants={itemVariants}
+            animate={statsHovered ? "hovered" : "visible"}
+          >
             <FaUsers className="donate__stat-icon" />
             <div className="donate__stat-content">
-              <h3>10,00+</h3>
+              <h3>1,000+</h3>
               <p>Lives Impacted</p>
             </div>
           </motion.div>
 
-          <motion.div className="donate__stat-item" variants={itemVariants}>
+          <motion.div
+            className={`donate__stat-item ${
+              statsHovered ? "donate__stat-item--hovered" : ""
+            }`}
+            variants={itemVariants}
+            animate={statsHovered ? "hovered" : "visible"}
+          >
             <FaHandHoldingHeart className="donate__stat-icon" />
             <div className="donate__stat-content">
               <h3>₹5L+</h3>
@@ -321,7 +353,13 @@ const Donate = () => {
             </div>
           </motion.div>
 
-          <motion.div className="donate__stat-item" variants={itemVariants}>
+          <motion.div
+            className={`donate__stat-item ${
+              statsHovered ? "donate__stat-item--hovered" : ""
+            }`}
+            variants={itemVariants}
+            animate={statsHovered ? "hovered" : "visible"}
+          >
             <FaGlobe className="donate__stat-icon" />
             <div className="donate__stat-content">
               <h3>10+</h3>

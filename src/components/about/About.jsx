@@ -250,7 +250,7 @@ const About = () => {
                     role: "Board Member",
                   },
                   { img: director2, name: "Smt. K S Sarala", role: "Director" },
-                  { img: director3, name: "Smt Geetha", role: "Director" },
+                  { img: director3, name: "Smt. Geetha", role: "Director" },
                   { img: director4, name: "Director 4", role: "Board Member" },
                   { img: director5, name: "Director 5", role: "Board Member" },
                   { img: director6, name: "Director 6", role: "Board Member" },
