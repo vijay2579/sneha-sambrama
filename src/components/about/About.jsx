@@ -235,7 +235,9 @@ const About = () => {
                   <img src={tejasvi} alt="Tejasvi" />
                 </div>
                 <div className="about__team-info about__team-info--large">
-                  <div className="about__team-name">Tejasvi</div>
+                  <div className="about__team-name">
+                    Shri Tejasvi Kattimani T R
+                  </div>
                   <div className="about__team-role">President</div>
                 </div>
               </motion.div>

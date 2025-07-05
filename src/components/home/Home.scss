@@ -28,6 +28,7 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: $spacing-xl;
     margin-top: $spacing-xl;
+    padding: 0 $spacing-xl;
 
     @include responsive(md) {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

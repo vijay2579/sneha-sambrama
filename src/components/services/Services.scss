@@ -116,6 +116,8 @@
 
     @include responsive(sm) {
       border-radius: $border-radius-sm;
+      padding: $spacing-md;
+      text-align: center;
     }
 
     &:hover {

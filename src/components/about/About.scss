@@ -80,6 +80,7 @@
 
     @include responsive(sm) {
       margin-bottom: $spacing-xl;
+      padding: 0 1rem;
     }
   }
 
@@ -146,7 +147,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: $spacing-xl;
     margin-top: $spacing-md;
-    padding: 0 $spacing-xl;
+    padding: 0 $spacing-md;
 
     @include responsive(md) {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
