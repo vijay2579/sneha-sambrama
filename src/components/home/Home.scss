@@ -1,13 +1,224 @@
-.home-section {
-  text-align: center;
-  padding: 3rem 1rem;
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #0077ff;
+// Import variables and mixins
+@import '../../styles/variables.scss';
+
+// Home Component
+.home {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Home Content Section
+.home-content {
+  padding: $spacing-3xl 0;
+  background: $white;
+  position: relative;
+
+  @include responsive(md) {
+    padding: $spacing-2xl 0;
   }
+
+  @include responsive(sm) {
+    padding: $spacing-xl 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-xl;
+    margin-top: $spacing-xl;
+
+    @include responsive(md) {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  &__card {
+    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+    text-align: center;
+    @include shadow-md;
+    border: 1px solid rgba($primary-color, 0.1);
+    transition: $transition-normal;
+    position: relative;
+    overflow: hidden;
+
+    @include responsive(md) {
+      padding: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-md;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+      transform: scaleX(0);
+      transition: $transition-normal;
+    }
+
+    &:hover {
+      @include shadow-lg;
+      transform: translateY(-5px);
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .home-content__icon {
+        transform: scale(1.1) rotate(5deg);
+        color: $primary-color;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-4xl;
+    color: $secondary-color;
+    margin-bottom: $spacing-md;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba($black, 0.1));
+    transition: $transition-normal;
+
+    @include responsive(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__card h3 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    @include gradient-text;
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__card p {
+    font-size: $font-size-base;
+    line-height: $line-height-relaxed;
+    color: $text-secondary;
+    margin: 0;
+
+    @include responsive(md) {
+      font-size: $font-size-sm;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// Legacy styles for backward compatibility
+.home-section {
+  padding: $spacing-3xl 0;
+  text-align: center;
+  background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+
+  h1 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-lg;
+    @include gradient-text;
+
+    @include responsive(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
   p {
-    font-size: 1.2rem;
-    color: #333;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include responsive(md) {
+      font-size: $font-size-base;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// Responsive optimizations
+@include responsive(md) {
+  .home-content {
+    &__card {
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
+}
+
+@include responsive(sm) {
+  .home-content {
+    &__card {
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .home-content {
+    &__card {
+      border: 2px solid $primary-color;
+    }
+
+    &__card h3 {
+      color: $text-primary;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .home-content {
+    &__card {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+
+    &__icon {
+      transition: none;
+    }
   }
 } 

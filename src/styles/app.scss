@@ -2,6 +2,13 @@
 @import './variables.scss';
 @import './fonts.scss';
 
+// CSS Custom Properties
+:root {
+  --header-height: #{$header-height};
+  --header-height-mobile: #{$header-height-mobile};
+  --scroll-offset: #{$scroll-offset};
+}
+
 // Global Reset and Base Styles
 * {
   margin: 0;
@@ -11,17 +18,19 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
-  font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
-  background: $background-light;
-  color: $text-primary;
-  line-height: $line-height-normal;
-  font-size: $font-size-base;
-  font-weight: $font-weight-normal;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background: $background-light;
+  overflow-x: hidden;
 }
 
 // Typography
@@ -121,28 +130,60 @@ img {
   display: block;
 }
 
-// Container
-.container {
-  max-width: $container-max-width;
-  margin: 0 auto;
-  padding: 0 $container-padding;
+// App container
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+// Main content
+.main-content {
+  flex: 1;
+  margin-top: var(--header-height); // Account for fixed header
+}
+
+// Section styling
+.section {
+  min-height: 100vh;
+  padding: $spacing-3xl 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   @include responsive(md) {
-    padding: 0 $spacing-md;
+    padding: $spacing-2xl 0;
+    min-height: auto;
+  }
+  
+  @include responsive(sm) {
+    padding: $spacing-xl 0;
   }
 }
 
-// Main Content
-.main-content {
-  margin-top: 80px; // Account for fixed header
-  min-height: calc(100vh - 80px);
-  padding: $spacing-2xl 0;
+// Section specific styling
+#home {
+  background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+}
 
-  @include responsive(md) {
-    margin-top: 70px;
-    min-height: calc(100vh - 70px);
-    padding: $spacing-xl 0;
-  }
+#about {
+  background: $white;
+}
+
+#services {
+  background: linear-gradient(135deg, $background-lighter 0%, $background-light 100%);
+}
+
+#gallery {
+  background: $white;
+}
+
+#contact {
+  background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+}
+
+#donate {
+  background: $white;
 }
 
 // Utility Classes
@@ -229,7 +270,14 @@ img {
 
 // Animation Classes
 .fade-in {
-  animation: fadeIn 0.6s ease-in-out;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .slide-up {
@@ -291,5 +339,18 @@ img {
   body {
     background: white !important;
     color: black !important;
+  }
+} 
+
+// Responsive utilities
+@include responsive(md) {
+  .hide-md {
+    display: none;
+  }
+}
+
+@include responsive(sm) {
+  .hide-sm {
+    display: none;
   }
 } 

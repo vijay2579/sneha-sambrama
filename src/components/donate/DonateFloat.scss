@@ -1,0 +1,187 @@
+// Import variables and mixins
+@import '../../styles/variables.scss';
+
+// Floating Donate Button
+.donate-float {
+  position: fixed;
+  right: $spacing-lg;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: $z-index-fixed;
+  pointer-events: auto;
+
+  @include responsive(md) {
+    right: $spacing-md;
+  }
+
+  @include responsive(sm) {
+    right: $spacing-sm;
+  }
+
+  &__button {
+    @include flex-center;
+    flex-direction: column;
+    gap: $spacing-xs;
+    width: 80px;
+    height: 80px;
+    border-radius: $border-radius-full;
+    @include gradient-bg;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    @include shadow-lg;
+    transition: $transition-normal;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+
+    @include responsive(md) {
+      width: 70px;
+      height: 70px;
+    }
+
+    @include responsive(sm) {
+      width: 60px;
+      height: 60px;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      @include shadow-xl;
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-xl;
+    color: $white;
+    z-index: 2;
+    position: relative;
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__text {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    position: relative;
+    margin-top: -2px;
+
+    @include responsive(sm) {
+      font-size: 0.6rem;
+    }
+  }
+
+  &__pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius-full;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Hover effects
+  &:hover {
+    .donate-float__button {
+      @include shadow-xl;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .donate-float__icon {
+      transform: scale(1.1);
+    }
+
+    .donate-float__text {
+      transform: scale(1.05);
+    }
+  }
+
+  // Active state
+  &:active {
+    .donate-float__button {
+      transform: scale(0.95);
+    }
+  }
+
+  // Animation for attention
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(-50%) translateX(0);
+    }
+    50% {
+      transform: translateY(-50%) translateX(-5px);
+    }
+  }
+
+  // Apply floating animation
+  animation: float 3s ease-in-out infinite;
+
+  // Responsive adjustments
+  @include responsive(md) {
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @include responsive(sm) {
+    animation: float 2s ease-in-out infinite;
+  }
+}
+
+// Mobile optimization
+@include responsive(sm) {
+  .donate-float {
+    &__button {
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    &:hover {
+      .donate-float__button {
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .donate-float {
+    &__button {
+      border: 3px solid $white;
+    }
+
+    &__text {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .donate-float {
+    animation: none;
+
+    &__icon {
+      animation: none;
+    }
+
+    &__pulse {
+      animation: none;
+    }
+  }
+} 

@@ -1,13 +1,801 @@
-.services-section {
-  padding: 2rem 1rem;
-  h2 {
-    color: #0077ff;
-    margin-bottom: 1rem;
+// Import variables and mixins
+@import '../../styles/variables.scss';
+
+// Services Component
+.services {
+  padding: $spacing-3xl 0;
+  background: linear-gradient(135deg, $background-lighter 0%, $background-light 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  @include responsive(md) {
+    padding: $spacing-2xl 0;
   }
+
+  @include responsive(sm) {
+    padding: $spacing-xl 0;
+  }
+
+  // Header Section
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+
+    @include responsive(md) {
+      margin-bottom: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-extrabold;
+    margin-bottom: $spacing-md;
+    @include gradient-text;
+    text-shadow: 0 2px 4px rgba($black, 0.1);
+
+    @include responsive(md) {
+      font-size: $font-size-4xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-xl;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: $line-height-relaxed;
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  // Services Carousel
+  &__carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: $spacing-2xl auto 0;
+    overflow: hidden;
+
+    @include responsive(md) {
+      margin-top: $spacing-xl;
+    }
+
+    @include responsive(sm) {
+      margin-top: $spacing-lg;
+    }
+  }
+
+  // Services Grid
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-xl;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    @include responsive(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  // Service Tiles
+  &__tile {
+    background: $white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    @include shadow-md;
+    transition: $transition-normal;
+    border: 1px solid rgba($primary-color, 0.1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    @include responsive(md) {
+      border-radius: $border-radius;
+    }
+
+    @include responsive(sm) {
+      border-radius: $border-radius-sm;
+    }
+
+    &:hover {
+      @include shadow-xl;
+      border-color: var(--service-color);
+      
+      .services__tile-bg {
+        transform: scale(1.1);
+        
+        &::after {
+          opacity: 1;
+        }
+      }
+      
+      .services__tile-icon {
+        transform: scale(1.2) rotate(10deg);
+        color: $primary-color;
+        filter: drop-shadow(0 6px 12px rgba($black, 0.6));
+      }
+      
+      .services__tile-title {
+        color: var(--service-color);
+        transform: translateY(-2px);
+      }
+      
+      .services__tile-stats {
+        color: var(--service-color);
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+
+  &__tile-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    @include responsive(md) {
+      height: 180px;
+    }
+
+    @include responsive(sm) {
+      height: 160px;
+    }
+  }
+
+  &__tile-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(var(--service-color), 0.8) 0%,
+        rgba(var(--service-color), 0.4) 50%,
+        rgba($black, 0.2) 100%
+      );
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+  }
+
+  &__tile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    @include flex-center;
+    background: rgba($black, 0.1);
+  }
+
+  &__tile-icon {
+    font-size: $font-size-4xl;
+    color: $secondary-color;
+    text-shadow: 0 2px 4px rgba($black, 0.3);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: drop-shadow(0 4px 8px rgba($black, 0.4));
+
+    @include responsive(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__tile-content {
+    padding: $spacing-lg;
+    position: relative;
+
+    @include responsive(md) {
+      padding: $spacing-md;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-sm;
+    }
+  }
+
+  &__tile-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__tile-subtitle {
+    font-size: $font-size-sm;
+    color: var(--service-color);
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    @include responsive(sm) {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__tile-stats {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    font-weight: $font-weight-medium;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__tile-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--service-color), 0.9);
+    @include flex-center;
+    color: $white;
+    font-weight: $font-weight-semibold;
+    text-align: center;
+    border-radius: $border-radius-lg;
+
+    @include responsive(md) {
+      border-radius: $border-radius;
+    }
+
+    @include responsive(sm) {
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  &__tile-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(var(--service-color), 0.2) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: $border-radius-lg;
+
+    @include responsive(md) {
+      border-radius: $border-radius;
+    }
+
+    @include responsive(sm) {
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  // Carousel Navigation
+  &__carousel-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+    padding: 0 $spacing-lg;
+
+    @include responsive(sm) {
+      padding: 0 $spacing-md;
+    }
+  }
+
+  &__nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: $border-radius-full;
+    background: rgba($white, 0.9);
+    border: 2px solid rgba($primary-color, 0.2);
+    color: $primary-color;
+    font-size: $font-size-lg;
+    cursor: pointer;
+    @include flex-center;
+    pointer-events: all;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    @include shadow-md;
+    backdrop-filter: blur(10px);
+
+    @include responsive(md) {
+      width: 45px;
+      height: 45px;
+      font-size: $font-size-base;
+    }
+
+    @include responsive(sm) {
+      width: 40px;
+      height: 40px;
+      font-size: $font-size-sm;
+    }
+
+    &:hover {
+      background: $white;
+      border-color: $primary-color;
+      color: $primary-color;
+      @include shadow-lg;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &--prev {
+      margin-right: auto;
+    }
+
+    &--next {
+      margin-left: auto;
+    }
+  }
+
+  // Carousel Dots
+  &__carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xl;
+    padding: $spacing-md;
+
+    @include responsive(md) {
+      margin-top: $spacing-lg;
+      gap: $spacing-xs;
+    }
+
+    @include responsive(sm) {
+      margin-top: $spacing-md;
+      padding: $spacing-sm;
+    }
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: $border-radius-full;
+    background: rgba($primary-color, 0.2);
+    border: 2px solid rgba($primary-color, 0.3);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+
+    @include responsive(sm) {
+      width: 10px;
+      height: 10px;
+    }
+
+    &:hover {
+      background: rgba($primary-color, 0.4);
+      border-color: rgba($primary-color, 0.6);
+      transform: scale(1.2);
+    }
+
+    &--active {
+      background: $primary-color;
+      border-color: $primary-color;
+      transform: scale(1.1);
+
+      &:hover {
+        transform: scale(1.3);
+      }
+    }
+  }
+
+  &__dot-fill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: $white;
+    border-radius: $border-radius-full;
+    transform: translate(-50%, -50%);
+
+    @include responsive(sm) {
+      width: 4px;
+      height: 4px;
+    }
+  }
+
+  // Modal Styles
+  &__modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($black, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: $z-index-modal;
+    @include flex-center;
+    padding: $spacing-lg;
+
+    @include responsive(sm) {
+      padding: $spacing-sm;
+    }
+  }
+
+  &__modal {
+    background: $white;
+    border-radius: $border-radius-lg;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    @include shadow-xl;
+    border: 2px solid var(--service-color);
+
+    @include responsive(md) {
+      max-width: 600px;
+      border-radius: $border-radius;
+    }
+
+    @include responsive(sm) {
+      max-width: 100%;
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  &__modal-close {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-full;
+    background: rgba($black, 0.8);
+    color: $white;
+    border: none;
+    font-size: $font-size-xl;
+    cursor: pointer;
+    z-index: 10;
+    @include flex-center;
+    transition: $transition-normal;
+
+    @include responsive(sm) {
+      width: 35px;
+      height: 35px;
+      font-size: $font-size-lg;
+      top: $spacing-sm;
+      right: $spacing-sm;
+    }
+
+    &:hover {
+      background: $black;
+      transform: scale(1.1);
+    }
+  }
+
+  &__modal-image {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+
+    @include responsive(md) {
+      height: 250px;
+    }
+
+    @include responsive(sm) {
+      height: 200px;
+    }
+  }
+
+  &__modal-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(var(--service-color), 0.8) 0%,
+        rgba(var(--service-color), 0.4) 50%,
+        rgba($black, 0.3) 100%
+      );
+    }
+  }
+
+  &__modal-content {
+    padding: $spacing-2xl;
+    position: relative;
+
+    @include responsive(md) {
+      padding: $spacing-xl;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-lg;
+    }
+  }
+
+  &__modal-icon {
+    position: absolute;
+    top: -30px;
+    left: $spacing-2xl;
+    width: 60px;
+    height: 60px;
+    background: var(--service-color);
+    border-radius: $border-radius-full;
+    @include flex-center;
+    color: $secondary-color;
+    font-size: $font-size-2xl;
+    @include shadow-lg;
+    border: 4px solid $white;
+    transition: $transition-normal;
+
+    @include responsive(md) {
+      width: 50px;
+      height: 50px;
+      font-size: $font-size-xl;
+      top: -25px;
+      left: $spacing-xl;
+    }
+
+    @include responsive(sm) {
+      width: 45px;
+      height: 45px;
+      font-size: $font-size-lg;
+      top: -22px;
+      left: $spacing-lg;
+    }
+
+    &:hover {
+      color: $primary-color;
+      transform: scale(1.1);
+    }
+  }
+
+  &__modal-content h2 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+    margin-top: $spacing-lg;
+
+    @include responsive(md) {
+      font-size: $font-size-2xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__modal-content h3 {
+    font-size: $font-size-lg;
+    color: var(--service-color);
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__modal-content p {
+    font-size: $font-size-base;
+    line-height: $line-height-relaxed;
+    color: $text-secondary;
+    margin-bottom: $spacing-lg;
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__modal-stats {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--service-color) 0%, var(--service-color) 100%);
+    color: $white;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-full;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+
+    @include responsive(sm) {
+      font-size: $font-size-xs;
+      padding: $spacing-xs $spacing-sm;
+    }
+  }
+}
+
+// Legacy styles for backward compatibility
+.services-section {
+  padding: $spacing-3xl 0;
+  text-align: center;
+  background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+
+  h2 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-lg;
+    @include gradient-text;
+
+    @include responsive(md) {
+      font-size: $font-size-2xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-xl;
+    }
+  }
+
   ul {
-    padding-left: 1.5rem;
-    li {
-      margin-bottom: 0.5rem;
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-lg;
+    max-width: 800px;
+    margin: 0 auto;
+
+    @include responsive(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  li {
+    background: $white;
+    padding: $spacing-lg;
+    border-radius: $border-radius;
+    @include shadow-md;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    transition: $transition-normal;
+
+    @include responsive(sm) {
+      padding: $spacing-md;
+      font-size: $font-size-base;
+    }
+
+    &:hover {
+      @include shadow-lg;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Responsive optimizations
+@include responsive(md) {
+  .services {
+    &__tile {
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+
+    &__carousel-nav {
+      padding: 0 $spacing-md;
+    }
+  }
+}
+
+@include responsive(sm) {
+  .services {
+    &__tile {
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+
+    &__carousel-nav {
+      padding: 0 $spacing-sm;
+    }
+
+    &__nav-btn {
+      width: 35px;
+      height: 35px;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .services {
+    &__tile {
+      border: 2px solid var(--service-color);
+    }
+
+    &__modal {
+      border: 3px solid var(--service-color);
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .services {
+    &__tile {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+
+    &__tile-bg {
+      transition: none;
+    }
+
+    &__tile-icon {
+      transition: none;
     }
   }
 } 

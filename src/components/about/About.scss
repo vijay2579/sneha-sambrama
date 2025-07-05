@@ -1,11 +1,837 @@
-.about-section {
-  padding: 2rem 1rem;
-  h2 {
-    color: #0077ff;
-    margin-bottom: 1rem;
+// Import variables and mixins
+@import '../../styles/variables.scss';
+
+// About Component
+.about {
+  padding: $spacing-3xl 0;
+  background: $white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  @include responsive(md) {
+    padding: $spacing-2xl 0;
   }
+
+  @include responsive(sm) {
+    padding: $spacing-xl 0;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  // Header Section
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+
+    @include responsive(md) {
+      margin-bottom: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-extrabold;
+    margin-bottom: $spacing-sm;
+    @include gradient-text;
+    text-shadow: 0 2px 4px rgba($black, 0.1);
+
+    @include responsive(md) {
+      font-size: $font-size-4xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-xl;
+    color: $secondary-color;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 1px;
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  // Main Text Section
+  &__main-text {
+    margin-bottom: $spacing-3xl;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include responsive(md) {
+      margin-bottom: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__intro,
+  &__mission {
+    font-size: $font-size-lg;
+    line-height: $line-height-relaxed;
+    color: $text-primary;
+    margin-bottom: $spacing-lg;
+    text-align: justify;
+
+    @include responsive(md) {
+      font-size: $font-size-base;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+      text-align: left;
+    }
+
+    strong {
+      color: $primary-color;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .highlight {
+    color: $secondary-color;
+    font-weight: $font-weight-semibold;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+      transform: scaleX(0);
+      transition: $transition-normal;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  // Mission, Vision, Values Section
+  &__mvp {
+    margin-bottom: $spacing-3xl;
+
+    @include responsive(md) {
+      margin-bottom: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__mvp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-xl;
+    margin-top: $spacing-xl;
+
+    @include responsive(md) {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  &__mvp-card {
+    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+    text-align: center;
+    @include shadow-md;
+    border: 1px solid rgba($primary-color, 0.1);
+    transition: $transition-normal;
+    position: relative;
+    overflow: hidden;
+
+    @include responsive(md) {
+      padding: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-md;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+      transform: scaleX(0);
+      transition: $transition-normal;
+    }
+
+    &:hover {
+      @include shadow-lg;
+      transform: translateY(-5px);
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .about__mvp-icon {
+        transform: scale(1.1) rotate(5deg);
+        color: $primary-color;
+      }
+    }
+  }
+
+  &__mvp-icon {
+    font-size: $font-size-4xl;
+    color: $secondary-color;
+    margin-bottom: $spacing-md;
+    transition: $transition-normal;
+
+    @include responsive(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__mvp-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__mvp-description {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+
+    @include responsive(md) {
+      font-size: $font-size-sm;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Section Titles
+  &__section-title {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+    @include gradient-text;
+
+    @include responsive(md) {
+      font-size: $font-size-2xl;
+      margin-bottom: $spacing-xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  // Values Section
+  &__values {
+    margin-bottom: $spacing-3xl;
+
+    @include responsive(md) {
+      margin-bottom: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-xl;
+    margin-top: $spacing-xl;
+
+    @include responsive(md) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  &__value-card {
+    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+    text-align: center;
+    @include shadow-md;
+    border: 1px solid rgba($primary-color, 0.1);
+    transition: $transition-normal;
+    position: relative;
+    overflow: hidden;
+
+    @include responsive(md) {
+      padding: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-md;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+      transform: scaleX(0);
+      transition: $transition-normal;
+    }
+
+    &:hover {
+      @include shadow-lg;
+      transform: translateY(-5px);
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .about__value-icon {
+        transform: scale(1.1) rotate(5deg);
+        color: $primary-color;
+      }
+    }
+  }
+
+  &__value-icon {
+    font-size: $font-size-4xl;
+    color: $secondary-color;
+    margin-bottom: $spacing-md;
+    transition: $transition-normal;
+
+    @include responsive(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__value-card h3 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+
+    @include responsive(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__value-card p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+
+    @include responsive(md) {
+      font-size: $font-size-sm;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Achievements Section
+  &__achievements {
+    margin-bottom: $spacing-3xl;
+
+    @include responsive(md) {
+      margin-bottom: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-xl;
+    margin-top: $spacing-xl;
+
+    @include responsive(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-md;
+    }
+  }
+
+  &__achievement-card {
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+    text-align: center;
+    color: $white;
+    @include shadow-lg;
+    transition: $transition-normal;
+
+    @include responsive(md) {
+      padding: $spacing-lg;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-md;
+    }
+
+    &:hover {
+      @include shadow-xl;
+      transform: translateY(-3px);
+    }
+  }
+
+  &__achievement-number {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-extrabold;
+    margin-bottom: $spacing-sm;
+    text-shadow: 0 2px 4px rgba($black, 0.2);
+
+    @include responsive(md) {
+      font-size: $font-size-3xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__achievement-label {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    opacity: 0.9;
+
+    @include responsive(md) {
+      font-size: $font-size-sm;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-xs;
+    }
+  }
+
+  // Call to Action Section
+  &__cta {
+    text-align: center;
+    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+    padding: $spacing-2xl;
+    border-radius: $border-radius-lg;
+    @include shadow-md;
+    border: 1px solid rgba($primary-color, 0.1);
+
+    @include responsive(md) {
+      padding: $spacing-xl;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-lg;
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: $text-primary;
+      margin-bottom: $spacing-lg;
+      font-weight: $font-weight-medium;
+
+      @include responsive(md) {
+        font-size: $font-size-base;
+      }
+
+      @include responsive(sm) {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  &__cta-button {
+    @include gradient-bg;
+    color: $white;
+    border: none;
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-full;
+    cursor: pointer;
+    @include shadow-lg;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba($white, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: $transition-normal;
+
+    @include responsive(md) {
+      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-base;
+    }
+
+    @include responsive(sm) {
+      padding: $spacing-sm $spacing-md;
+      font-size: $font-size-sm;
+    }
+
+    &:hover {
+      @include shadow-xl;
+      border-color: rgba($white, 0.4);
+      transform: translateY(-2px);
+    }
+  }
+
+  // Meet Our Team Section
+  &__team {
+    margin-top: $spacing-3xl;
+    margin-bottom: $spacing-3xl;
+    
+    @include responsive(md) {
+      margin-top: $spacing-2xl;
+      margin-bottom: $spacing-2xl;
+    }
+    @include responsive(sm) {
+      margin-top: $spacing-xl;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: $spacing-xl;
+    margin-top: $spacing-xl;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    @include responsive(md) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-lg;
+    }
+    @include responsive(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  &__team-tile {
+    background: $white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    @include shadow-md;
+    transition: $transition-normal;
+    border: 1px solid rgba($primary-color, 0.1);
+    
+    &:hover {
+      @include shadow-xl;
+      border-color: $primary-color;
+      z-index: 2;
+      .about__team-img-wrapper img {
+        transform: scale(1.08);
+      }
+      .about__team-overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__team-img-wrapper {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    border-radius: $border-radius-lg;
+    
+    @include responsive(md) {
+      height: 220px;
+    }
+    @include responsive(sm) {
+      height: 180px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-radius: $border-radius-lg;
+    }
+  }
+
+  &__team-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($black, 0.7);
+    @include flex-center;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &__team-info {
+    text-align: center;
+    color: $white;
+    padding: $spacing-lg $spacing-md;
+    width: 100%;
+    @include flex-center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__team-name {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-xs;
+    text-shadow: 0 2px 4px rgba($black, 0.3);
+    @include responsive(sm) {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__team-role {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: rgba($white, 0.85);
+    text-shadow: 0 1px 2px rgba($black, 0.2);
+    @include responsive(sm) {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__team-featured-grid {
+    display: flex;
+    gap: $spacing-2xl;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: $spacing-xl;
+    @include responsive(md) {
+      flex-direction: column;
+      gap: $spacing-xl;
+    }
+    @include responsive(sm) {
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+  }
+
+  &__team-tile--large {
+    flex: 1 1 340px;
+    max-width: 420px;
+    min-width: 280px;
+    .about__team-img-wrapper--large {
+      height: 420px;
+      @include responsive(md) {
+        height: 320px;
+      }
+      @include responsive(sm) {
+        height: 220px;
+      }
+    }
+    .about__team-name {
+      font-size: $font-size-2xl;
+      @include responsive(md) {
+        font-size: $font-size-xl;
+      }
+      @include responsive(sm) {
+        font-size: $font-size-lg;
+      }
+    }
+    .about__team-role {
+      font-size: $font-size-lg;
+      @include responsive(md) {
+        font-size: $font-size-base;
+      }
+      @include responsive(sm) {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  &__team-small-grid {
+    flex: 2 1 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: $spacing-lg;
+    align-items: stretch;
+    @include responsive(md) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-md;
+    }
+    @include responsive(sm) {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-sm;
+    }
+  }
+
+  &__team-featured-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-2xl;
+    margin-top: $spacing-xl;
+    width: 100%;
+    @include responsive(md) {
+      gap: $spacing-xl;
+      margin-top: $spacing-lg;
+    }
+    @include responsive(sm) {
+      gap: $spacing-lg;
+      margin-top: $spacing-md;
+    }
+    .about__team-tile--large {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .about__team-small-grid {
+      width: 100%;
+      margin-top: $spacing-xl;
+      @include responsive(md) {
+        margin-top: $spacing-lg;
+      }
+      @include responsive(sm) {
+        margin-top: $spacing-md;
+      }
+    }
+  }
+}
+
+// Legacy styles for backward compatibility
+.about-section {
+  padding: $spacing-3xl 0;
+  text-align: center;
+  background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+
+  h2 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-lg;
+    @include gradient-text;
+
+    @include responsive(md) {
+      font-size: $font-size-2xl;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-xl;
+    }
+  }
+
   p {
-    font-size: 1.1rem;
-    color: #333;
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include responsive(md) {
+      font-size: $font-size-base;
+    }
+
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// Responsive optimizations
+@include responsive(md) {
+  .about {
+    &__mvp-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+}
+
+@include responsive(sm) {
+  .about {
+    &__mvp-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .about {
+    &__mvp-card,
+    &__value-card {
+      border: 2px solid $primary-color;
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .about {
+    &__mvp-card,
+    &__value-card {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+
+    &__mvp-icon,
+    &__value-icon {
+      transition: none;
+    }
   }
 } 

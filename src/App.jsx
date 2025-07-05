@@ -1,28 +1,59 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import React from "react";
+import "./app.scss";
 import About from "./components/about/About";
 import Contact from "./components/contact/Contact";
 import Donate from "./components/donate/Donate";
+import DonateFloat from "./components/donate/DonateFloat";
 import Gallery from "./components/gallery/Gallery";
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import Services from "./components/services/Services";
 
-function App() {
+const App = () => {
+  const scrollToDonate = () => {
+    const donateSection = document.getElementById("donate");
+    if (donateSection) {
+      const headerHeight =
+        parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--header-height"
+          )
+        ) || 80;
+      const elementPosition = donateSection.offsetTop - headerHeight;
+
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <Router>
+    <div className="app">
       <Header />
       <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/donate" element={<Donate />} />
-        </Routes>
+        <section id="home" className="section">
+          <Home />
+        </section>
+        <section id="about" className="section">
+          <About />
+        </section>
+        <section id="services" className="section">
+          <Services />
+        </section>
+        <section id="gallery" className="section">
+          <Gallery />
+        </section>
+        <section id="contact" className="section">
+          <Contact />
+        </section>
+        <section id="donate" className="section">
+          <Donate />
+        </section>
       </main>
-    </Router>
+      <DonateFloat onDonateClick={scrollToDonate} />
+    </div>
   );
-}
+};
 
 export default App;

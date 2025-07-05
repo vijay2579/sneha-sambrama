@@ -8,26 +8,20 @@ import {
   FaPhone,
   FaTools,
 } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
 import logopng from "../../assets/images/logopng.png";
 import "./Header.scss";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-
-  // Close menu when location changes
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { name: "Home", path: "/", icon: FaHome },
-    { name: "About Us", path: "/about", icon: FaInfoCircle },
-    { name: "Services", path: "/services", icon: FaTools },
-    { name: "Gallery", path: "/gallery", icon: FaImages },
-    { name: "Contact", path: "/contact", icon: FaPhone },
-    { name: "Donate", path: "/donate", icon: FaHeart },
+    { name: "Home", id: "home", icon: FaHome },
+    { name: "About Us", id: "about", icon: FaInfoCircle },
+    { name: "Services", id: "services", icon: FaTools },
+    { name: "Gallery", id: "gallery", icon: FaImages },
+    { name: "Contact", id: "contact", icon: FaPhone },
+    { name: "Donate", id: "donate", icon: FaHeart },
   ];
 
   const toggleMenu = () => {
@@ -37,6 +31,49 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight =
+        parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--header-height"
+          )
+        ) || 80;
+      const elementPosition = element.offsetTop - headerHeight;
+
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      });
+    }
+    closeMenu();
+  };
+
+  // Update active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map((item) => item.id);
+      const scrollOffset =
+        parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--scroll-offset"
+          )
+        ) || 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= window.scrollY + scrollOffset) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header className="header">
@@ -48,7 +85,10 @@ const Header = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <Link to="/" className="header__logo-link">
+          <button
+            className="header__logo-link"
+            onClick={() => scrollToSection("home")}
+          >
             <div className="header__logo-image">
               <img
                 src={logopng}
@@ -61,7 +101,7 @@ const Header = () => {
               <span className="header__logo-secondary">Sambrama</span>
             </div>
             <div className="header__logo-badge">Charity Foundation</div>
-          </Link>
+          </button>
         </motion.div>
 
         {/* Desktop Navigation */}
@@ -82,14 +122,13 @@ const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                 >
-                  <Link
-                    to={item.path}
+                  <button
                     className={`header__nav-link ${
-                      location.pathname === item.path
+                      activeSection === item.id
                         ? "header__nav-link--active"
                         : ""
                     }`}
-                    onClick={closeMenu}
+                    onClick={() => scrollToSection(item.id)}
                   >
                     <span className="header__nav-icon">
                       <IconComponent />
@@ -100,7 +139,7 @@ const Header = () => {
                       layoutId="nav-indicator"
                       initial={false}
                       animate={
-                        location.pathname === item.path
+                        activeSection === item.id
                           ? { opacity: 1, scale: 1 }
                           : { opacity: 0, scale: 0 }
                       }
@@ -110,7 +149,7 @@ const Header = () => {
                         damping: 30,
                       }}
                     />
-                  </Link>
+                  </button>
                 </motion.li>
               );
             })}
@@ -163,20 +202,19 @@ const Header = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                     >
-                      <Link
-                        to={item.path}
+                      <button
                         className={`header__nav-link header__nav-link--mobile ${
-                          location.pathname === item.path
+                          activeSection === item.id
                             ? "header__nav-link--active"
                             : ""
                         }`}
-                        onClick={closeMenu}
+                        onClick={() => scrollToSection(item.id)}
                       >
                         <span className="header__nav-icon">
                           <IconComponent />
                         </span>
                         <span className="header__nav-text">{item.name}</span>
-                      </Link>
+                      </button>
                     </motion.li>
                   );
                 })}

@@ -1,0 +1,445 @@
+// Import variables and mixins
+@import '../../styles/variables.scss';
+
+// Home Slider Component
+.section {
+  padding: 0 !important;
+  .home-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
+  
+    @include responsive(md) {
+      height: 80vh;
+    }
+  
+    @include responsive(sm) {
+      height: 70vh;
+    }
+  
+    &__container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    &__slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    &__image {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba($primary-color, 0.8) 0%,
+          rgba($secondary-color, 0.6) 50%,
+          rgba($black, 0.4) 100%
+        );
+        z-index: 1;
+      }
+    }
+  
+    &__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-2xl;
+    }
+  
+    &__content {
+      text-align: center;
+      max-width: 800px;
+      color: $white;
+      z-index: 3;
+      position: relative;
+  
+      @include responsive(md) {
+        max-width: 600px;
+        padding: $spacing-xl;
+      }
+  
+      @include responsive(sm) {
+        max-width: 100%;
+        padding: $spacing-lg;
+      }
+    }
+  
+    &__title {
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-extrabold;
+      margin-bottom: $spacing-md;
+      text-shadow: 0 4px 8px rgba($black, 0.3);
+      background: linear-gradient(135deg, $white 0%, rgba($white, 0.9) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+  
+      @include responsive(md) {
+        font-size: $font-size-4xl;
+      }
+  
+      @include responsive(sm) {
+        font-size: $font-size-3xl;
+      }
+    }
+  
+    &__subtitle {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      margin-bottom: $spacing-lg;
+      color: rgba($white, 0.9);
+      text-shadow: 0 2px 4px rgba($black, 0.3);
+  
+      @include responsive(md) {
+        font-size: $font-size-xl;
+      }
+  
+      @include responsive(sm) {
+        font-size: $font-size-lg;
+      }
+    }
+  
+    &__description {
+      font-size: $font-size-lg;
+      line-height: $line-height-relaxed;
+      margin-bottom: $spacing-xl;
+      color: rgba($white, 0.8);
+      text-shadow: 0 1px 2px rgba($black, 0.3);
+  
+      @include responsive(md) {
+        font-size: $font-size-base;
+      }
+  
+      @include responsive(sm) {
+        font-size: $font-size-sm;
+      }
+    }
+  
+    &__cta {
+      @include gradient-bg;
+      color: $white;
+      border: none;
+      padding: $spacing-md $spacing-xl;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      border-radius: $border-radius-full;
+      cursor: pointer;
+      @include shadow-lg;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba($white, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: $transition-normal;
+  
+      @include responsive(md) {
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-base;
+      }
+  
+      @include responsive(sm) {
+        padding: $spacing-sm $spacing-md;
+        font-size: $font-size-sm;
+      }
+  
+      &:hover {
+        @include shadow-xl;
+        border-color: rgba($white, 0.4);
+        transform: translateY(-2px);
+      }
+    }
+  
+    // Navigation Arrows
+    &__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: $border-radius-full;
+      background: rgba($white, 0.1);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba($white, 0.2);
+      color: $white;
+      font-size: $font-size-xl;
+      cursor: pointer;
+      z-index: 10;
+      @include flex-center;
+      transition: $transition-normal;
+  
+      @include responsive(md) {
+        width: 50px;
+        height: 50px;
+        font-size: $font-size-lg;
+      }
+  
+      @include responsive(sm) {
+        width: 40px;
+        height: 40px;
+        font-size: $font-size-base;
+      }
+  
+      &:hover {
+        background: rgba($white, 0.2);
+        border-color: rgba($white, 0.4);
+        @include shadow-lg;
+      }
+  
+      &--prev {
+        left: $spacing-lg;
+  
+        @include responsive(md) {
+          left: $spacing-md;
+        }
+  
+        @include responsive(sm) {
+          left: $spacing-sm;
+        }
+      }
+  
+      &--next {
+        right: $spacing-lg;
+  
+        @include responsive(md) {
+          right: $spacing-md;
+        }
+  
+        @include responsive(sm) {
+          right: $spacing-sm;
+        }
+      }
+    }
+  
+    // Play/Pause Button
+    &__play {
+      position: absolute;
+      top: $spacing-lg;
+      right: $spacing-lg;
+      width: 50px;
+      height: 50px;
+      border-radius: $border-radius-full;
+      background: rgba($white, 0.1);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba($white, 0.2);
+      color: $white;
+      font-size: $font-size-lg;
+      cursor: pointer;
+      z-index: 10;
+      @include flex-center;
+      transition: $transition-normal;
+  
+      @include responsive(md) {
+        width: 45px;
+        height: 45px;
+        font-size: $font-size-base;
+        top: $spacing-md;
+        right: $spacing-md;
+      }
+  
+      @include responsive(sm) {
+        width: 40px;
+        height: 40px;
+        font-size: $font-size-sm;
+        top: $spacing-sm;
+        right: $spacing-sm;
+      }
+  
+      &:hover {
+        background: rgba($white, 0.2);
+        border-color: rgba($white, 0.4);
+        @include shadow-lg;
+      }
+    }
+  
+    // Dots Indicator
+    &__dots {
+      position: absolute;
+      bottom: $spacing-xl;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: $spacing-sm;
+      z-index: 10;
+  
+      @include responsive(md) {
+        bottom: $spacing-lg;
+      }
+  
+      @include responsive(sm) {
+        bottom: $spacing-md;
+      }
+    }
+  
+    &__dot {
+      width: 16px;
+      height: 16px;
+      border-radius: $border-radius-full;
+      background: rgba($white, 0.3);
+      border: 2px solid rgba($white, 0.5);
+      cursor: pointer;
+      position: relative;
+      transition: $transition-normal;
+  
+      @include responsive(sm) {
+        width: 12px;
+        height: 12px;
+      }
+  
+      &:hover {
+        background: rgba($white, 0.5);
+        border-color: rgba($white, 0.7);
+      }
+  
+      &--active {
+        background: rgba($white, 0.8);
+        border-color: $white;
+        @include shadow-sm;
+      }
+    }
+  
+    &__dot-fill {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: $border-radius-full;
+      background: $accent-color;
+      @include shadow-sm;
+  
+      @include responsive(sm) {
+        width: 6px;
+        height: 6px;
+      }
+    }
+  
+    // Progress Bar
+    &__progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+      z-index: 10;
+      transform-origin: left;
+    }
+  
+    // Glass morphism effect for content
+    &__content {
+      background: rgba($white, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: $border-radius-lg;
+      padding: $spacing-2xl;
+      border: 1px solid rgba($white, 0.2);
+      @include shadow-lg;
+  
+      @include responsive(md) {
+        padding: $spacing-xl;
+      }
+  
+      @include responsive(sm) {
+        padding: $spacing-lg;
+      }
+    }
+  
+    // Enhanced animations
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(100px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+  
+    @keyframes slideOut {
+      from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(-100px) scale(0.9);
+      }
+    }
+  
+    // Responsive optimizations
+    @include responsive(md) {
+      &__nav {
+        opacity: 0.8;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  
+    @include responsive(sm) {
+      &__nav {
+        opacity: 0.6;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
+  
+      &__dots {
+        gap: $spacing-xs;
+      }
+    }
+  
+    // High contrast mode support
+    @media (prefers-contrast: high) {
+      &__nav,
+      &__play {
+        background: rgba($black, 0.8);
+        border-color: $white;
+      }
+  
+      &__dot {
+        border-color: $white;
+      }
+    }
+  
+    // Reduced motion support
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  } 
+}
