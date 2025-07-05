@@ -739,6 +739,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr 1fr;
       gap: $spacing-sm;
+      padding: 0;
     }
   }
 
