@@ -163,8 +163,8 @@ const Gallery = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+  </section>
+);
 };
 
 export default Gallery;

@@ -14,7 +14,7 @@ import {
 import "./Donate.scss";
 
 const Donate = () => {
-  const [selectedMethod, setSelectedMethod] = useState('bank');
+  const [selectedMethod, setSelectedMethod] = useState("bank");
   const [copiedField, setCopiedField] = useState(null);
 
   const paymentMethods = [
@@ -111,39 +111,6 @@ const Donate = () => {
             community. Every contribution makes a difference in someone's life.
           </p>
         </motion.div>
-
-        <motion.div
-          className="donate__stats"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div className="donate__stat-item" variants={itemVariants}>
-            <FaUsers className="donate__stat-icon" />
-            <div className="donate__stat-content">
-              <h3>10,000+</h3>
-              <p>Lives Impacted</p>
-            </div>
-          </motion.div>
-
-          <motion.div className="donate__stat-item" variants={itemVariants}>
-            <FaHandHoldingHeart className="donate__stat-icon" />
-            <div className="donate__stat-content">
-              <h3>₹50L+</h3>
-              <p>Funds Raised</p>
-            </div>
-          </motion.div>
-
-          <motion.div className="donate__stat-item" variants={itemVariants}>
-            <FaGlobe className="donate__stat-icon" />
-            <div className="donate__stat-content">
-              <h3>25+</h3>
-              <p>Communities Served</p>
-            </div>
-          </motion.div>
-        </motion.div>
-
         <motion.div
           className="donate__content"
           initial={{ opacity: 0, y: 50 }}
@@ -356,6 +323,38 @@ const Donate = () => {
               </div>
             </motion.div>
           )}
+        </motion.div>
+
+        <motion.div
+          className="donate__stats"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div className="donate__stat-item" variants={itemVariants}>
+            <FaUsers className="donate__stat-icon" />
+            <div className="donate__stat-content">
+              <h3>10,000+</h3>
+              <p>Lives Impacted</p>
+            </div>
+          </motion.div>
+
+          <motion.div className="donate__stat-item" variants={itemVariants}>
+            <FaHandHoldingHeart className="donate__stat-icon" />
+            <div className="donate__stat-content">
+              <h3>₹50L+</h3>
+              <p>Funds Raised</p>
+            </div>
+          </motion.div>
+
+          <motion.div className="donate__stat-item" variants={itemVariants}>
+            <FaGlobe className="donate__stat-icon" />
+            <div className="donate__stat-content">
+              <h3>25+</h3>
+              <p>Communities Served</p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

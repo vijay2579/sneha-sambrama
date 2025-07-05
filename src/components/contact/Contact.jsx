@@ -233,12 +233,12 @@ const Contact = () => {
                   </span>
                 )}
               </motion.button>
-            </form>
+    </form>
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+  </section>
+);
 };
 
 export default Contact;

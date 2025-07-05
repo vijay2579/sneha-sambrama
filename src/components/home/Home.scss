@@ -73,8 +73,8 @@
     }
 
     &:hover {
+      transform: translateY(-2px);
       @include shadow-lg;
-      transform: translateY(-5px);
 
       &::before {
         transform: scaleX(1);
@@ -82,14 +82,17 @@
 
       .home-content__icon {
         transform: scale(1.1) rotate(5deg);
-        color: $primary-color;
+        background: $special-color;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
     }
   }
 
   &__icon {
     font-size: $font-size-4xl;
-    color: $secondary-color;
+    color: $primary-color;
     margin-bottom: $spacing-md;
     display: block;
     filter: drop-shadow(0 2px 4px rgba($black, 0.1));
@@ -165,7 +168,7 @@
 
     @include responsive(md) {
       font-size: $font-size-base;
-    }
+  }
 
     @include responsive(sm) {
       font-size: $font-size-sm;
@@ -178,7 +181,7 @@
   .home-content {
     &__card {
       &:hover {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
       }
     }
   }
