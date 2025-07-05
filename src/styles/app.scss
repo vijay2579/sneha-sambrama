@@ -141,6 +141,7 @@ img {
 .main-content {
   flex: 1;
   margin-top: var(--header-height); // Account for fixed header
+  padding: 0 8rem;
 }
 
 // Section styling

@@ -3,7 +3,7 @@
 
 // About Component
 .about {
-  padding: $spacing-3xl 0;
+  padding: $spacing-md 0;
   background: $white;
   min-height: 100vh;
   display: flex;
@@ -26,7 +26,7 @@
   // Header Section
   &__header {
     text-align: center;
-    margin-bottom: $spacing-3xl;
+    margin-bottom: $spacing-xl;
 
     @include responsive(md) {
       margin-bottom: $spacing-2xl;
@@ -72,8 +72,7 @@
   &__main-text {
     margin-bottom: $spacing-3xl;
     max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 
     @include responsive(md) {
       margin-bottom: $spacing-2xl;
@@ -146,7 +145,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: $spacing-xl;
-    margin-top: $spacing-xl;
+    margin-top: $spacing-md;
+    padding: 0 $spacing-xl;
 
     @include responsive(md) {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -197,7 +197,6 @@
       &::before {
         transform: scaleX(1);
       }
-
       .about__mvp-icon {
         transform: scale(1.1) rotate(5deg);
         color: $primary-color;
@@ -254,7 +253,7 @@
     font-size: $font-size-3xl;
     font-weight: $font-weight-bold;
     text-align: center;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing-xl;
     @include gradient-text;
 
     @include responsive(md) {
@@ -285,6 +284,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: $spacing-xl;
+    padding: 0 $spacing-xl;
     margin-top: $spacing-xl;
 
     @include responsive(md) {
@@ -614,27 +614,45 @@
     }
   }
 
-  &__team-overlay {
+  &__team-info {
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba($black, 0.7);
-    @include flex-center;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  &__team-info {
-    text-align: center;
+    background: rgba($black, 0.65);
     color: $white;
-    padding: $spacing-lg $spacing-md;
-    width: 100%;
+    padding: $spacing-md $spacing-sm;
+    border-bottom-left-radius: $border-radius-lg;
+    border-bottom-right-radius: $border-radius-lg;
+    text-align: center;
+    z-index: 2;
     @include flex-center;
     flex-direction: column;
-    justify-content: center;
+    min-height: 56px;
+    @include responsive(sm) {
+      padding: $spacing-sm $spacing-xs;
+      min-height: 40px;
+    }
   }
+
+  &__team-info--large {
+    font-size: $font-size-lg;
+    padding: $spacing-lg $spacing-md;
+    min-height: 72px;
+    @include responsive(md) {
+      font-size: $font-size-base;
+      padding: $spacing-md $spacing-sm;
+      min-height: 56px;
+    }
+    @include responsive(sm) {
+      font-size: $font-size-sm;
+      padding: $spacing-sm $spacing-xs;
+      min-height: 40px;
+    }
+  }
+
+  // Remove overlay styles for about__team-overlay if present
+  &__team-overlay { display: none !important; }
 
   &__team-name {
     font-size: $font-size-lg;
@@ -742,6 +760,7 @@
     }
     .about__team-small-grid {
       width: 100%;
+      padding: 0 $spacing-xl;
       margin-top: $spacing-xl;
       @include responsive(md) {
         margin-top: $spacing-lg;

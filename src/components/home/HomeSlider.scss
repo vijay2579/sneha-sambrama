@@ -178,60 +178,61 @@
     }
   
     // Navigation Arrows
-    &__nav {
+    &__arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       width: 60px;
       height: 60px;
       border-radius: $border-radius-full;
-      background: rgba($white, 0.1);
-      backdrop-filter: blur(20px);
-      border: 2px solid rgba($white, 0.2);
+      background: $primary-color;
+      border: 2px solid $primary-color;
       color: $white;
       font-size: $font-size-xl;
       cursor: pointer;
       z-index: 10;
       @include flex-center;
       transition: $transition-normal;
-  
+      box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+
       @include responsive(md) {
         width: 50px;
         height: 50px;
         font-size: $font-size-lg;
       }
-  
+
       @include responsive(sm) {
         width: 40px;
         height: 40px;
         font-size: $font-size-base;
       }
-  
+
       &:hover {
-        background: rgba($white, 0.2);
-        border-color: rgba($white, 0.4);
+        background: $secondary-color;
+        border-color: $secondary-color;
         @include shadow-lg;
+        transform: translateY(-50%) scale(1.1);
       }
-  
+
       &--prev {
         left: $spacing-lg;
-  
+
         @include responsive(md) {
           left: $spacing-md;
         }
-  
+
         @include responsive(sm) {
           left: $spacing-sm;
         }
       }
-  
+
       &--next {
         right: $spacing-lg;
-  
+
         @include responsive(md) {
           right: $spacing-md;
         }
-  
+
         @include responsive(sm) {
           right: $spacing-sm;
         }

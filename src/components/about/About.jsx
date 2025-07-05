@@ -233,17 +233,10 @@ const About = () => {
               >
                 <div className="about__team-img-wrapper about__team-img-wrapper--large">
                   <img src={tejasvi} alt="Tejasvi" />
-                  <motion.div
-                    className="about__team-overlay"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                  >
-                    <div className="about__team-info">
-                      <div className="about__team-name">Tejasvi</div>
-                      <div className="about__team-role">President</div>
-                    </div>
-                  </motion.div>
+                </div>
+                <div className="about__team-info about__team-info--large">
+                  <div className="about__team-name">Tejasvi</div>
+                  <div className="about__team-role">President</div>
                 </div>
               </motion.div>
               {/* Grid of smaller directors below */}
@@ -281,17 +274,10 @@ const About = () => {
                   >
                     <div className="about__team-img-wrapper">
                       <img src={member.img} alt={member.name} />
-                      <motion.div
-                        className="about__team-overlay"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                      >
-                        <div className="about__team-info">
-                          <div className="about__team-name">{member.name}</div>
-                          <div className="about__team-role">{member.role}</div>
-                        </div>
-                      </motion.div>
+                    </div>
+                    <div className="about__team-info">
+                      <div className="about__team-name">{member.name}</div>
+                      <div className="about__team-role">{member.role}</div>
                     </div>
                   </motion.div>
                 ))}
