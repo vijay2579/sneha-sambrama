@@ -236,7 +236,7 @@ const About = () => {
                 </div>
                 <div className="about__team-info about__team-info--large">
                   <div className="about__team-name">
-                    Shri Tejasvi Kattimani T R
+                    Shri. Tejasvi Kattimani T R
                   </div>
                   <div className="about__team-role">President</div>
                 </div>
@@ -246,18 +246,18 @@ const About = () => {
                 {[
                   {
                     img: director1,
-                    name: "Shri Bheerappa",
+                    name: "Shri. Bheerappa",
                     role: "Board Member",
                   },
-                  { img: director2, name: "Director 2", role: "Board Member" },
-                  { img: director3, name: "Director 3", role: "Board Member" },
+                  { img: director2, name: "Smt. K S Sarala", role: "Director" },
+                  { img: director3, name: "Smt Geetha", role: "Director" },
                   { img: director4, name: "Director 4", role: "Board Member" },
                   { img: director5, name: "Director 5", role: "Board Member" },
                   { img: director6, name: "Director 6", role: "Board Member" },
                   { img: director7, name: "Director 7", role: "Board Member" },
                   { img: director8, name: "Director 8", role: "Board Member" },
                   { img: director9, name: "Director 9", role: "Board Member" },
-                  { img: director10, name: "Shri Umesh D", role: "Director" },
+                  { img: director10, name: "Shri. Umesh D", role: "Director" },
                 ].map((member, idx) => (
                   <motion.div
                     className="about__team-tile"
