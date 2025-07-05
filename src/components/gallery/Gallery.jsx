@@ -62,11 +62,7 @@ const Gallery = () => {
   const totalSlides = Math.ceil(galleryImages.length / imagesPerSlide);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 5000);
-
-    return () => clearInterval(interval);
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
   }, [totalSlides]);
 
   const getCurrentSlideImages = () => {
@@ -163,8 +159,8 @@ const Gallery = () => {
           </div>
         </div>
       </div>
-  </section>
-);
+    </section>
+  );
 };
 
 export default Gallery;
