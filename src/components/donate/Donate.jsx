@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import {
+  FaArrowRight,
   FaCheck,
   FaCopy,
   FaGlobe,
   FaHandHoldingHeart,
   FaHeart,
   FaMobile,
-  FaQrcode,
   FaUniversity,
   FaUsers,
 } from "react-icons/fa";
@@ -15,15 +15,15 @@ import { BANK_DETAILS } from "../../utils";
 import "./Donate.scss";
 
 const Donate = () => {
-  const [selectedMethod, setSelectedMethod] = useState("bank");
   const [copiedField, setCopiedField] = useState(null);
 
   const paymentMethods = [
     {
       id: "bank",
       title: "Bank Transfer",
+      subtitle: "Direct bank transfer",
       icon: FaUniversity,
-      color: "#4CAF50",
+      gradient: "linear-gradient(135deg, #4CAF50, #45a049)",
       details: {
         accountName: BANK_DETAILS.bank_account_holder_name,
         accountNumber: BANK_DETAILS.bank_account_number,
@@ -33,33 +33,17 @@ const Donate = () => {
       },
     },
     {
-      id: "upi",
-      title: "UPI Payment",
+      id: "digital",
+      title: "Digital Payments",
+      subtitle: "UPI, Google Pay & PhonePe",
       icon: FaMobile,
-      color: "#2196F3",
+      gradient: "linear-gradient(135deg, #2196F3, #5F259F)",
       details: {
         upiId: BANK_DETAILS.bank_upi_id,
         qrCode: BANK_DETAILS.bank_qr_code,
-      },
-    },
-    {
-      id: "gpay",
-      title: "Google Pay",
-      icon: FaMobile,
-      color: "#4285F4",
-      details: {
         phoneNumber: BANK_DETAILS.bank_phone_number,
-        upiId: BANK_DETAILS.bank_gpay_id,
-      },
-    },
-    {
-      id: "phonepay",
-      title: "PhonePe",
-      icon: FaMobile,
-      color: "#5F259F",
-      details: {
-        phoneNumber: BANK_DETAILS.bank_phone_number,
-        upiId: BANK_DETAILS.bank_phonepay_id,
+        gpayId: BANK_DETAILS.bank_gpay_id,
+        phonepayId: BANK_DETAILS.bank_phonepay_id,
       },
     },
   ];
@@ -93,6 +77,163 @@ const Donate = () => {
     },
   };
 
+  const renderPaymentDetails = (method) => {
+    switch (method.id) {
+      case "bank":
+        return (
+          <div className="donate__method-details">
+            <div className="donate__detail-item">
+              <label>Account Name</label>
+              <div className="donate__detail-value">
+                <span>Sneha Sambrama Charity Foundation</span>
+                <button
+                  onClick={() =>
+                    copyToClipboard(
+                      BANK_DETAILS.bank_account_holder_name,
+                      "accountName"
+                    )
+                  }
+                  className="donate__copy-btn"
+                >
+                  {copiedField === "accountName" ? <FaCheck /> : <FaCopy />}
+                </button>
+              </div>
+            </div>
+
+            <div className="donate__detail-row">
+              <div className="donate__detail-item">
+                <label>Account Number</label>
+                <div className="donate__detail-value">
+                  <span>{BANK_DETAILS.bank_account_number}</span>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(
+                        BANK_DETAILS.bank_account_number,
+                        "accountNumber"
+                      )
+                    }
+                    className="donate__copy-btn"
+                  >
+                    {copiedField === "accountNumber" ? <FaCheck /> : <FaCopy />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="donate__detail-item">
+                <label>IFSC Code</label>
+                <div className="donate__detail-value">
+                  <span>{BANK_DETAILS.bank_ifsc_code}</span>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(BANK_DETAILS.bank_ifsc_code, "ifscCode")
+                    }
+                    className="donate__copy-btn"
+                  >
+                    {copiedField === "ifscCode" ? <FaCheck /> : <FaCopy />}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="donate__detail-row">
+              <div className="donate__detail-item">
+                <label>Bank Name</label>
+                <span>{BANK_DETAILS.bank_name}</span>
+              </div>
+
+              <div className="donate__detail-item">
+                <label>Branch</label>
+                <span>{BANK_DETAILS.bank_branch}</span>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "digital":
+        return (
+          <div className="donate__method-details">
+            {/* <div className="donate__qr-section">
+              <div className="donate__qr-code">
+                <FaQrcode />
+                <p>Scan QR Code</p>
+              </div>
+            </div> */}
+
+            <div className="donate__detail-item">
+              <label>UPI ID</label>
+              <div className="donate__detail-value">
+                <span>{BANK_DETAILS.bank_upi_id}</span>
+                <button
+                  onClick={() =>
+                    copyToClipboard(BANK_DETAILS.bank_upi_id, "upiId")
+                  }
+                  className="donate__copy-btn"
+                >
+                  {copiedField === "upiId" ? <FaCheck /> : <FaCopy />}
+                </button>
+              </div>
+            </div>
+
+            <div className="donate__detail-item">
+              <label>Phone Number</label>
+              <div className="donate__detail-value">
+                <span>{BANK_DETAILS.bank_phone_number}</span>
+                <button
+                  onClick={() =>
+                    copyToClipboard(
+                      BANK_DETAILS.bank_phone_number,
+                      "phoneNumber"
+                    )
+                  }
+                  className="donate__copy-btn"
+                >
+                  {copiedField === "phoneNumber" ? <FaCheck /> : <FaCopy />}
+                </button>
+              </div>
+            </div>
+
+            <div className="donate__detail-row">
+              <div className="donate__detail-item">
+                <label>Google Pay ID</label>
+                <div className="donate__detail-value">
+                  <span>{BANK_DETAILS.bank_gpay_id}</span>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(BANK_DETAILS.bank_gpay_id, "gpayId")
+                    }
+                    className="donate__copy-btn"
+                  >
+                    {copiedField === "gpayId" ? <FaCheck /> : <FaCopy />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="donate__detail-item">
+                <label>PhonePe ID</label>
+                <div className="donate__detail-value">
+                  <span>{BANK_DETAILS.bank_phonepay_id}</span>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(
+                        BANK_DETAILS.bank_phonepay_id,
+                        "phonepayId"
+                      )
+                    }
+                    className="donate__copy-btn"
+                  >
+                    {copiedField === "phonepayId" ? <FaCheck /> : <FaCopy />}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <section id="donate" className="donate">
       <div className="container">
@@ -112,6 +253,7 @@ const Donate = () => {
             community. Every contribution makes a difference in someone's life.
           </p>
         </motion.div>
+
         <motion.div
           className="donate__content"
           initial={{ opacity: 0, y: 50 }}
@@ -119,219 +261,49 @@ const Donate = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <div className="donate__methods">
+          <div className="donate__methods-section">
             <h3 className="donate__methods-title">
-              Choose Your Payment Method
+              Choose Your Preferred Payment Method
             </h3>
+            <p className="donate__methods-subtitle">
+              All payment methods are secure and instant. Select the one that
+              works best for you.
+            </p>
 
             <div className="donate__methods-grid">
-              {paymentMethods.map((method) => (
+              {paymentMethods.map((method, index) => (
                 <motion.div
                   key={method.id}
-                  className={`donate__method-card ${
-                    selectedMethod === method.id
-                      ? "donate__method-card--active"
-                      : ""
-                  }`}
-                  onClick={() => setSelectedMethod(method.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="donate__method-card"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
                 >
-                  <div
-                    className="donate__method-icon"
-                    style={{ backgroundColor: method.color }}
-                  >
-                    <method.icon />
+                  <div className="donate__method-header">
+                    <div
+                      className="donate__method-icon"
+                      style={{ background: method.gradient }}
+                    >
+                      <method.icon />
+                    </div>
+                    <div className="donate__method-info">
+                      <h4>{method.title}</h4>
+                      <p>{method.subtitle}</p>
+                    </div>
+                    <div className="donate__method-arrow">
+                      <FaArrowRight />
+                    </div>
                   </div>
-                  <h4>{method.title}</h4>
+
+                  <div className="donate__method-content">
+                    {renderPaymentDetails(method)}
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
-
-          {selectedMethod && (
-            <motion.div
-              className="donate__details"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="donate__details-header">
-                <h3>
-                  {paymentMethods.find((m) => m.id === selectedMethod)?.title}{" "}
-                  Details
-                </h3>
-                <button
-                  className="donate__close-btn"
-                  onClick={() => setSelectedMethod(null)}
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="donate__details-content">
-                {selectedMethod === "bank" && (
-                  <div className="donate__bank-details">
-                    <div className="donate__detail-item">
-                      <label>Account Name</label>
-                      <div className="donate__detail-value">
-                        <span>Sneha Sambrama Charity Foundation</span>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(
-                              BANK_DETAILS.bank_account_holder_name
-                            )
-                          }
-                          className="donate__copy-btn"
-                        >
-                          {copiedField === "accountName" ? (
-                            <FaCheck />
-                          ) : (
-                            <FaCopy />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="donate__detail-item">
-                      <label>Account Number</label>
-                      <div className="donate__detail-value">
-                        <span>{BANK_DETAILS.bank_account_number}</span>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(
-                              BANK_DETAILS.bank_account_number,
-                              "accountNumber"
-                            )
-                          }
-                          className="donate__copy-btn"
-                        >
-                          {copiedField === "accountNumber" ? (
-                            <FaCheck />
-                          ) : (
-                            <FaCopy />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="donate__detail-item">
-                      <label>IFSC Code</label>
-                      <div className="donate__detail-value">
-                        <span>{BANK_DETAILS.bank_ifsc_code}</span>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(
-                              BANK_DETAILS.bank_ifsc_code,
-                              "ifscCode"
-                            )
-                          }
-                          className="donate__copy-btn"
-                        >
-                          {copiedField === "ifscCode" ? (
-                            <FaCheck />
-                          ) : (
-                            <FaCopy />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="donate__detail-item">
-                      <label>Bank Name</label>
-                      <span>{BANK_DETAILS.bank_name}</span>
-                    </div>
-
-                    <div className="donate__detail-item">
-                      <label>Branch</label>
-                      <span>{BANK_DETAILS.bank_branch}</span>
-                    </div>
-                  </div>
-                )}
-
-                {selectedMethod === "upi" && (
-                  <div className="donate__upi-details">
-                    <div className="donate__qr-section">
-                      <div className="donate__qr-code">
-                        <FaQrcode />
-                        <p>Scan QR Code</p>
-                      </div>
-                    </div>
-
-                    <div className="donate__detail-item">
-                      <label>UPI ID</label>
-                      <div className="donate__detail-value">
-                        <span>{BANK_DETAILS.bank_upi_id}</span>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(BANK_DETAILS.bank_upi_id, "upiId")
-                          }
-                          className="donate__copy-btn"
-                        >
-                          {copiedField === "upiId" ? <FaCheck /> : <FaCopy />}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {(selectedMethod === "gpay" ||
-                  selectedMethod === "phonepay") && (
-                  <div className="donate__mobile-details">
-                    <div className="donate__detail-item">
-                      <label>Phone Number</label>
-                      <div className="donate__detail-value">
-                        <span>{BANK_DETAILS.bank_phone_number}</span>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(
-                              BANK_DETAILS.bank_phone_number,
-                              "phoneNumber"
-                            )
-                          }
-                          className="donate__copy-btn"
-                        >
-                          {copiedField === "phoneNumber" ? (
-                            <FaCheck />
-                          ) : (
-                            <FaCopy />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="donate__detail-item">
-                      <label>UPI ID</label>
-                      <div className="donate__detail-value">
-                        <span>
-                          {selectedMethod === "gpay"
-                            ? BANK_DETAILS.bank_gpay_id
-                            : BANK_DETAILS.bank_phonepay_id}
-                        </span>
-                        <button
-                          onClick={() =>
-                            copyToClipboard(
-                              selectedMethod === "gpay"
-                                ? BANK_DETAILS.bank_gpay_id
-                                : BANK_DETAILS.bank_phonepay_id,
-                              "mobileUpiId"
-                            )
-                          }
-                          className="donate__copy-btn"
-                        >
-                          {copiedField === "mobileUpiId" ? (
-                            <FaCheck />
-                          ) : (
-                            <FaCopy />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          )}
         </motion.div>
 
         <motion.div

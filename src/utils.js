@@ -21,9 +21,9 @@ export const BANK_DETAILS = {
   bank_account_type: "Savings",
   bank_account_holder_name: "Sneha Sambrama Charity Foundation(R)",
   bank_account_holder_address: ADDRESS,
-  bank_upi_id: "snehasambrama@okicici",
-  bank_gpay_id: "snehasambrama@okicici",
-  bank_phonepay_id: "snehasambrama@okicici",
+  bank_upi_id: "snehasambrama@axl",
+  bank_gpay_id: "snehasambrama@axl",
+  bank_phonepay_id: "snehasambrama@axl",
   bank_qr_code: "/qr-code-upi.png",
   bank_phone_number: PHONE,
 };
