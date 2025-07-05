@@ -219,15 +219,15 @@
       width: 60px;
       height: 60px;
       border-radius: $border-radius-full;
-      background: $primary-color;
-      border: 2px solid $primary-color;
+      background: $special-color;
+      border: 2px solid $special-color;
       color: $white;
       font-size: $font-size-xl;
       cursor: pointer;
       z-index: 10;
       @include flex-center;
       transition: $transition-normal;
-      box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+      box-shadow: 0 4px 15px rgba($special-color, 0.3);
 
       @include responsive(md) {
         width: 50px;
@@ -242,8 +242,8 @@
       }
 
       &:hover {
-        background: $secondary-color;
-        border-color: $secondary-color;
+        background: $primary-color;
+        border-color: $primary-color;
         @include shadow-lg;
         transform: translateY(-50%) scale(1.1);
       }

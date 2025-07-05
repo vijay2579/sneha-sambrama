@@ -262,14 +262,6 @@ const Donate = () => {
           viewport={{ once: true }}
         >
           <div className="donate__methods-section">
-            <h3 className="donate__methods-title">
-              Choose Your Preferred Payment Method
-            </h3>
-            <p className="donate__methods-subtitle">
-              All payment methods are secure and instant. Select the one that
-              works best for you.
-            </p>
-
             <div className="donate__methods-grid">
               {paymentMethods.map((method, index) => (
                 <motion.div

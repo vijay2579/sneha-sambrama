@@ -164,7 +164,7 @@
         @include shadow-lg;
 
         .header__nav-icon {
-          color: $white;
+          color: #FFF;
         }
       }
 
@@ -190,7 +190,7 @@
           background: linear-gradient(135deg, #ff6b6b, #ee5a24);
 
           .header__nav-icon {
-            color: $white;
+            color: #FFF;
           }
         }
 
@@ -209,7 +209,7 @@
     &-icon {
       font-size: $font-size-xl;
       transition: $transition-normal;
-      color: $secondary-color;
+      color: $special-color;
       display: flex;
       align-items: center;
       justify-content: center;

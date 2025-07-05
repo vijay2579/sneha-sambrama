@@ -103,7 +103,7 @@
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    color: $primary-color;
+    color: $special-color;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     z-index: 10;
@@ -115,7 +115,8 @@
     }
 
     &:hover {
-      background: white;
+      background: $special-color;
+      color: white;
       transform: translateY(-50%) scale(1.1);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }

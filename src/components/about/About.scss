@@ -147,7 +147,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: $spacing-xl;
     margin-top: $spacing-md;
-    padding: 0 $spacing-md;
+    padding: 0 2rem;
 
     @include responsive(md) {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
