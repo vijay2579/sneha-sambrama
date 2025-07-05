@@ -281,40 +281,38 @@ const Donate = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <div className="donate__methods-section">
-            <div className="donate__methods-grid">
-              {paymentMethods.map((method, index) => (
-                <motion.div
-                  key={method.id}
-                  className="donate__method-card"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="donate__method-header">
-                    <div
-                      className="donate__method-icon"
-                      style={{ background: method.gradient }}
-                    >
-                      <method.icon />
-                    </div>
-                    <div className="donate__method-info">
-                      <h4>{method.title}</h4>
-                      <p>{method.subtitle}</p>
-                    </div>
-                    <div className="donate__method-arrow">
-                      <FaArrowRight />
-                    </div>
+          <div className="donate__methods-grid">
+            {paymentMethods.map((method, index) => (
+              <motion.div
+                key={method.id}
+                className="donate__method-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="donate__method-header">
+                  <div
+                    className="donate__method-icon"
+                    style={{ background: method.gradient }}
+                  >
+                    <method.icon />
                   </div>
+                  <div className="donate__method-info">
+                    <h4>{method.title}</h4>
+                    <p>{method.subtitle}</p>
+                  </div>
+                  <div className="donate__method-arrow">
+                    <FaArrowRight />
+                  </div>
+                </div>
 
-                  <div className="donate__method-content">
-                    {renderPaymentDetails(method)}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                <div className="donate__method-content">
+                  {renderPaymentDetails(method)}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 

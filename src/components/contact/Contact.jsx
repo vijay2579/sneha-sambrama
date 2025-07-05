@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaCheckCircle,
   FaEnvelope,
@@ -25,6 +25,16 @@ const Contact = () => {
   const [touched, setTouched] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [contactTilesHovered, setContactTilesHovered] = useState(false);
+
+  // Set contact tiles to hovered state after component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setContactTilesHovered(true);
+    }, 1000); // Apply hover effects 1 second after page load
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Validation rules
   const validationRules = {
@@ -210,6 +220,15 @@ const Contact = () => {
         ease: "easeOut",
       },
     },
+    hovered: {
+      opacity: 1,
+      y: -5,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 0.5,
+      },
+    },
   };
 
   return (
@@ -238,7 +257,13 @@ const Contact = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div className="contact__info-item" variants={itemVariants}>
+            <motion.div
+              className={`contact__info-item ${
+                contactTilesHovered ? "contact__info-item--hovered" : ""
+              }`}
+              variants={itemVariants}
+              animate={contactTilesHovered ? "hovered" : "visible"}
+            >
               <div className="contact__info-icon">
                 <FaMapMarkerAlt />
               </div>
@@ -248,7 +273,13 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            <motion.div className="contact__info-item" variants={itemVariants}>
+            <motion.div
+              className={`contact__info-item ${
+                contactTilesHovered ? "contact__info-item--hovered" : ""
+              }`}
+              variants={itemVariants}
+              animate={contactTilesHovered ? "hovered" : "visible"}
+            >
               <div className="contact__info-icon">
                 <FaPhone />
               </div>
@@ -258,7 +289,13 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            <motion.div className="contact__info-item" variants={itemVariants}>
+            <motion.div
+              className={`contact__info-item ${
+                contactTilesHovered ? "contact__info-item--hovered" : ""
+              }`}
+              variants={itemVariants}
+              animate={contactTilesHovered ? "hovered" : "visible"}
+            >
               <div className="contact__info-icon">
                 <FaEnvelope />
               </div>
