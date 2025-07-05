@@ -1,35 +1,37 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  FaBook,
   FaChevronLeft,
   FaChevronRight,
-  FaChild,
   FaGraduationCap,
-  FaHandHoldingHeart,
   FaHeartbeat,
-  FaHome,
-  FaUsers,
-  FaUtensils,
+  FaTint,
 } from "react-icons/fa";
 import "./Services.scss";
 
 const Services = () => {
-  const [selectedService, setSelectedService] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [serviceCarousels, setServiceCarousels] = useState({});
 
-  // Service data structure - you can add your images here
+  // Service data structure with relative images and carousel images
   const services = [
     {
       id: 1,
-      title: "Education Support",
-      subtitle: "Empowering through Knowledge",
+      title: "Udyoga Mela",
+      subtitle: "Employment Opportunities for All",
       description:
-        "Providing quality education, school supplies, and learning resources to underprivileged children. Our comprehensive education programs include after-school tutoring, computer literacy classes, and scholarship opportunities for deserving students.",
+        "Organizing job fairs and employment melas to connect job seekers with potential employers. We facilitate skill development workshops, provide career counseling, and create networking opportunities to help individuals find meaningful employment and build sustainable careers.",
       icon: FaGraduationCap,
-      image: "/placeholder-education.jpg", // Replace with your image path
-      color: "#667eea",
-      stats: "500+ Children Educated",
+      color: "#e74c3c",
+      stats: "400+ Jobs Created",
+      carouselImages: [
+        "/src/assets/images/udyogamela/2.jpeg",
+        "/src/assets/images/udyogamela/4.jpeg",
+        "/src/assets/images/udyogamela/5.jpeg",
+        "/src/assets/images/udyogamela/6.jpeg",
+        "/src/assets/images/udyogamela/p2.jpeg",
+        "/src/assets/images/udyogamela/price.jpeg",
+      ],
     },
     {
       id: 2,
@@ -38,81 +40,55 @@ const Services = () => {
       description:
         "Offering medical check-ups, health camps, and basic healthcare support to communities in need. We organize regular health awareness programs, dental camps, and provide essential medicines to families who cannot afford them.",
       icon: FaHeartbeat,
-      image: "/placeholder-healthcare.jpg", // Replace with your image path
-      color: "#764ba2",
+      color: "#e74c3c",
       stats: "1000+ Health Check-ups",
+      carouselImages: [
+        "/src/assets/images/healthcare/c3.jpeg",
+        "/src/assets/images/healthcare/c4.jpeg",
+        "/src/assets/images/healthcare/c5.jpeg",
+        "/src/assets/images/healthcare/camp1.jpeg",
+        "/src/assets/images/healthcare/camp2.jpeg",
+        "/src/assets/images/healthcare/k4.jpeg",
+      ],
     },
     {
       id: 3,
-      title: "Food Distribution",
-      subtitle: "Nourishing Communities",
+      title: "Blood Donation Camp",
+      subtitle: "Saving Lives Through Donation",
       description:
-        "Regular food distribution programs to ensure no family goes hungry in our communities. We provide nutritious meals, food packages, and support local farmers to create sustainable food security programs.",
-      icon: FaUtensils,
-      image: "/placeholder-food.jpg", // Replace with your image path
-      color: "#ff6b6b",
-      stats: "2000+ Meals Served",
-    },
-    {
-      id: 4,
-      title: "Community Care",
-      subtitle: "Supporting Families",
-      description:
-        "Comprehensive support programs for families including counseling and social welfare activities. We provide emotional support, family counseling, and help families access government benefits and resources.",
-      icon: FaHandHoldingHeart,
-      image: "/placeholder-community.jpg", // Replace with your image path
-      color: "#4ecdc4",
-      stats: "500+ Families Supported",
-    },
-    {
-      id: 5,
-      title: "Women Empowerment",
-      subtitle: "Building Strong Women",
-      description:
-        "Skill development, vocational training, and empowerment programs for women in the community. We offer sewing classes, computer training, and micro-enterprise support to help women become financially independent.",
-      icon: FaUsers,
-      image: "/placeholder-women.jpg", // Replace with your image path
-      color: "#45b7d1",
-      stats: "200+ Women Empowered",
-    },
-    {
-      id: 6,
-      title: "Housing Support",
-      subtitle: "Providing Shelter",
-      description:
-        "Assistance with housing repairs, construction support, and shelter for homeless families. We help with home repairs, provide construction materials, and support families in building safe and secure homes.",
-      icon: FaHome,
-      image: "/placeholder-housing.jpg", // Replace with your image path
-      color: "#96ceb4",
-      stats: "50+ Homes Repaired",
-    },
-    {
-      id: 7,
-      title: "Library Services",
-      subtitle: "Knowledge Access",
-      description:
-        "Community libraries and reading programs to promote literacy and lifelong learning. We maintain community libraries, organize reading sessions, and provide books and educational materials to children and adults.",
-      icon: FaBook,
-      image: "/placeholder-library.jpg", // Replace with your image path
-      color: "#feca57",
-      stats: "3 Community Libraries",
-    },
-    {
-      id: 8,
-      title: "Child Development",
-      subtitle: "Nurturing Young Minds",
-      description:
-        "Early childhood development programs, play activities, and child care support services. We focus on holistic child development through play-based learning, nutrition programs, and early intervention services.",
-      icon: FaChild,
-      image: "/placeholder-children.jpg", // Replace with your image path
-      color: "#ff9ff3",
-      stats: "300+ Children in Programs",
+        "Organizing regular blood donation camps to ensure adequate blood supply for emergency medical needs. We partner with hospitals and blood banks to conduct awareness campaigns, donor registration drives, and maintain a network of voluntary blood donors to support critical healthcare requirements.",
+      icon: FaTint,
+      color: "#e74c3c",
+      stats: "300+ Blood Units Collected",
+      carouselImages: [
+        "/src/assets/images/blooddonation/hero3.jpeg",
+        "/src/assets/images/blooddonation/hero4.jpeg",
+      ],
     },
   ];
 
-  const handleServiceClick = (service) => {
-    setSelectedService(selectedService?.id === service.id ? null : service);
-  };
+  // Auto-slide functionality for individual service carousels
+  useEffect(() => {
+    const intervals = {};
+
+    services.forEach((service) => {
+      intervals[service.id] = setInterval(() => {
+        setServiceCarousels((prev) => {
+          const currentIndex = prev[service.id] || 0;
+          const nextIndex = (currentIndex + 1) % service.carouselImages.length;
+          return {
+            ...prev,
+            [service.id]: nextIndex,
+          };
+        });
+      }, 3000); // 3 seconds interval
+    });
+
+    // Cleanup intervals on component unmount
+    return () => {
+      Object.values(intervals).forEach((interval) => clearInterval(interval));
+    };
+  }, []); // Empty dependency array means this runs once on mount
 
   const nextSlide = () => {
     const maxSlides = Math.ceil(services.length / 3) - 1;
@@ -126,6 +102,27 @@ const Services = () => {
 
   const goToSlide = (slideIndex) => {
     setCurrentSlide(slideIndex);
+  };
+
+  // Individual service carousel controls
+  const nextServiceSlide = (serviceId) => {
+    setServiceCarousels((prev) => ({
+      ...prev,
+      [serviceId]:
+        ((prev[serviceId] || 0) + 1) %
+        services.find((s) => s.id === serviceId).carouselImages.length,
+    }));
+  };
+
+  const prevServiceSlide = (serviceId) => {
+    const service = services.find((s) => s.id === serviceId);
+    setServiceCarousels((prev) => ({
+      ...prev,
+      [serviceId]:
+        prev[serviceId] === 0
+          ? service.carouselImages.length - 1
+          : (prev[serviceId] || 0) - 1,
+    }));
   };
 
   // Calculate which services to show based on current slide
@@ -179,32 +176,6 @@ const Services = () => {
     },
   };
 
-  const modalVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      y: 50,
-      transition: {
-        duration: 0.3,
-        ease: "easeIn",
-      },
-    },
-  };
-
   return (
     <div className="services">
       <div className="container">
@@ -233,20 +204,22 @@ const Services = () => {
           >
             {getVisibleServices().map((service) => {
               const IconComponent = service.icon;
+              const currentImageIndex = serviceCarousels[service.id] || 0;
+              const currentImage = service.carouselImages[currentImageIndex];
+
               return (
                 <motion.div
                   key={service.id}
                   className="services__tile"
                   variants={tileVariants}
                   whileHover="hover"
-                  onClick={() => handleServiceClick(service)}
                   style={{ "--service-color": service.color }}
                 >
                   <div className="services__tile-image">
                     <div
                       className="services__tile-bg"
                       style={{
-                        backgroundImage: `url(${service.image})`,
+                        backgroundImage: `url(${currentImage})`,
                         backgroundColor: service.color + "20", // Fallback color
                       }}
                     >
@@ -254,6 +227,56 @@ const Services = () => {
                         <div className="services__tile-icon">
                           <IconComponent />
                         </div>
+                      </div>
+
+                      {/* Individual Service Carousel Controls */}
+                      <div className="services__tile-carousel-controls">
+                        <motion.button
+                          className="services__tile-carousel-btn services__tile-carousel-btn--prev"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            prevServiceSlide(service.id);
+                          }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <FaChevronLeft />
+                        </motion.button>
+
+                        <motion.button
+                          className="services__tile-carousel-btn services__tile-carousel-btn--next"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            nextServiceSlide(service.id);
+                          }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <FaChevronRight />
+                        </motion.button>
+                      </div>
+
+                      {/* Carousel Indicators */}
+                      <div className="services__tile-carousel-indicators">
+                        {service.carouselImages.map((_, index) => (
+                          <motion.div
+                            key={index}
+                            className={`services__tile-carousel-indicator ${
+                              index === currentImageIndex
+                                ? "services__tile-carousel-indicator--active"
+                                : ""
+                            }`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setServiceCarousels((prev) => ({
+                                ...prev,
+                                [service.id]: index,
+                              }));
+                            }}
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.8 }}
+                          />
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -264,15 +287,6 @@ const Services = () => {
                       {service.subtitle}
                     </p>
                     <div className="services__tile-stats">{service.stats}</div>
-
-                    <motion.div
-                      className="services__tile-hover"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <span>Click to learn more</span>
-                    </motion.div>
                   </div>
 
                   <motion.div

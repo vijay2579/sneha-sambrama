@@ -215,72 +215,183 @@
     background: rgba($black, 0.1);
   }
 
+  // Individual Service Carousel Controls
+  &__tile-carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $spacing-sm;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    .services__tile:hover & {
+      opacity: 1;
+    }
+  }
+
+  &__tile-carousel-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: $border-radius-full;
+    background: rgba($white, 0.9);
+    border: 2px solid rgba($white, 0.3);
+    color: $primary-color;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    @include flex-center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    @include shadow-md;
+    backdrop-filter: blur(10px);
+
+    @include responsive(sm) {
+      width: 30px;
+      height: 30px;
+      font-size: $font-size-xs;
+    }
+
+    &:hover {
+      background: $white;
+      border-color: $primary-color;
+      color: $primary-color;
+      @include shadow-lg;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &--prev {
+      margin-right: auto;
+    }
+
+    &--next {
+      margin-left: auto;
+    }
+  }
+
+  // Carousel Indicators
+  &__tile-carousel-indicators {
+    position: absolute;
+    bottom: $spacing-sm;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: $spacing-xs;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    .services__tile:hover & {
+      opacity: 1;
+    }
+  }
+
+  &__tile-carousel-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: $border-radius-full;
+    background: rgba($white, 0.5);
+    border: 1px solid rgba($white, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    @include responsive(sm) {
+      width: 6px;
+      height: 6px;
+    }
+
+    &:hover {
+      background: rgba($white, 0.8);
+      border-color: $white;
+      transform: scale(1.2);
+    }
+
+    &--active {
+      background: $white;
+      border-color: $white;
+      @include shadow-sm;
+      transform: scale(1.3);
+    }
+  }
+
   &__tile-icon {
-    font-size: $font-size-4xl;
+    font-size: 3rem;
     color: $special-color;
-    text-shadow: 0 2px 4px rgba($black, 0.3);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    filter: drop-shadow(0 4px 8px rgba($black, 0.4));
+    text-shadow: 0 4px 8px rgba($special-color, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     @include responsive(md) {
-      font-size: $font-size-3xl;
+      font-size: 2.5rem;
     }
 
     @include responsive(sm) {
-      font-size: $font-size-2xl;
+      font-size: 2rem;
     }
   }
 
   &__tile-content {
-    padding: $spacing-lg;
+    padding: $spacing-xl;
+    text-align: center;
     position: relative;
+    z-index: 3;
 
     @include responsive(md) {
-      padding: $spacing-md;
+      padding: $spacing-lg;
     }
 
     @include responsive(sm) {
-      padding: $spacing-sm;
+      padding: $spacing-md;
     }
   }
 
   &__tile-title {
-    font-size: $font-size-xl;
+    font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
-    color: $text-primary;
-    margin-bottom: $spacing-xs;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-bottom: $spacing-sm;
+    color: $primary-color;
+    text-align: center;
 
     @include responsive(md) {
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
     }
 
     @include responsive(sm) {
-      font-size: $font-size-base;
+      font-size: $font-size-lg;
     }
   }
 
   &__tile-subtitle {
-    font-size: $font-size-sm;
-    color: var(--service-color);
+    font-size: $font-size-base;
+    color: $secondary-color;
+    margin-bottom: $spacing-md;
     font-weight: $font-weight-medium;
-    margin-bottom: $spacing-sm;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-align: center;
 
     @include responsive(sm) {
-      font-size: $font-size-xs;
+      font-size: $font-size-sm;
     }
   }
 
   &__tile-stats {
-    font-size: $font-size-base;
-    color: $text-secondary;
-    font-weight: $font-weight-medium;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $special-color;
+    text-align: center;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($special-color, 0.1);
+    border-radius: $border-radius-full;
+    border: 1px solid rgba($special-color, 0.2);
 
     @include responsive(sm) {
-      font-size: $font-size-sm;
+      font-size: $font-size-base;
+      padding: $spacing-xs $spacing-sm;
     }
   }
 
@@ -372,9 +483,9 @@
     }
 
     &:hover {
-      background: $white;
-      border-color: $primary-color;
-      color: $primary-color;
+      background: $special-color;
+      border-color: transparent;
+      color: $white;
       @include shadow-lg;
       transform: scale(1.05);
     }
@@ -458,219 +569,6 @@
     @include responsive(sm) {
       width: 4px;
       height: 4px;
-    }
-  }
-
-  // Modal Styles
-  &__modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba($black, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: $z-index-modal;
-    @include flex-center;
-    padding: $spacing-lg;
-
-    @include responsive(sm) {
-      padding: $spacing-sm;
-    }
-  }
-
-  &__modal {
-    background: $white;
-    border-radius: $border-radius-lg;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow: hidden;
-    position: relative;
-    @include shadow-xl;
-    border: 2px solid var(--service-color);
-
-    @include responsive(md) {
-      max-width: 600px;
-      border-radius: $border-radius;
-    }
-
-    @include responsive(sm) {
-      max-width: 100%;
-      border-radius: $border-radius-sm;
-    }
-  }
-
-  &__modal-close {
-    position: absolute;
-    top: $spacing-md;
-    right: $spacing-md;
-    width: 40px;
-    height: 40px;
-    border-radius: $border-radius-full;
-    background: rgba($black, 0.8);
-    color: $white;
-    border: none;
-    font-size: $font-size-xl;
-    cursor: pointer;
-    z-index: 10;
-    @include flex-center;
-    transition: $transition-normal;
-
-    @include responsive(sm) {
-      width: 35px;
-      height: 35px;
-      font-size: $font-size-lg;
-      top: $spacing-sm;
-      right: $spacing-sm;
-    }
-
-    &:hover {
-      background: $black;
-      transform: scale(1.1);
-    }
-  }
-
-  &__modal-image {
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-
-    @include responsive(md) {
-      height: 250px;
-    }
-
-    @include responsive(sm) {
-      height: 200px;
-    }
-  }
-
-  &__modal-bg {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(var(--service-color), 0.8) 0%,
-        rgba(var(--service-color), 0.4) 50%,
-        rgba($black, 0.3) 100%
-      );
-    }
-  }
-
-  &__modal-content {
-    padding: $spacing-2xl;
-    position: relative;
-
-    @include responsive(md) {
-      padding: $spacing-xl;
-    }
-
-    @include responsive(sm) {
-      padding: $spacing-lg;
-    }
-  }
-
-  &__modal-icon {
-    position: absolute;
-    top: -30px;
-    left: $spacing-2xl;
-    width: 60px;
-    height: 60px;
-    background: var(--service-color);
-    border-radius: $border-radius-full;
-    @include flex-center;
-    color: $secondary-color;
-    font-size: $font-size-2xl;
-    @include shadow-lg;
-    border: 4px solid $white;
-    transition: $transition-normal;
-
-    @include responsive(md) {
-      width: 50px;
-      height: 50px;
-      font-size: $font-size-xl;
-      top: -25px;
-      left: $spacing-xl;
-    }
-
-    @include responsive(sm) {
-      width: 45px;
-      height: 45px;
-      font-size: $font-size-lg;
-      top: -22px;
-      left: $spacing-lg;
-    }
-
-    &:hover {
-      color: $primary-color;
-      transform: scale(1.1);
-    }
-  }
-
-  &__modal-content h2 {
-    font-size: $font-size-3xl;
-    font-weight: $font-weight-bold;
-    color: $text-primary;
-    margin-bottom: $spacing-sm;
-    margin-top: $spacing-lg;
-
-    @include responsive(md) {
-      font-size: $font-size-2xl;
-    }
-
-    @include responsive(sm) {
-      font-size: $font-size-xl;
-    }
-  }
-
-  &__modal-content h3 {
-    font-size: $font-size-lg;
-    color: var(--service-color);
-    font-weight: $font-weight-semibold;
-    margin-bottom: $spacing-md;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    @include responsive(sm) {
-      font-size: $font-size-base;
-    }
-  }
-
-  &__modal-content p {
-    font-size: $font-size-base;
-    line-height: $line-height-relaxed;
-    color: $text-secondary;
-    margin-bottom: $spacing-lg;
-
-    @include responsive(sm) {
-      font-size: $font-size-sm;
-    }
-  }
-
-  &__modal-stats {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--service-color) 0%, var(--service-color) 100%);
-    color: $white;
-    padding: $spacing-sm $spacing-md;
-    border-radius: $border-radius-full;
-    font-weight: $font-weight-semibold;
-    font-size: $font-size-sm;
-
-    @include responsive(sm) {
-      font-size: $font-size-xs;
-      padding: $spacing-xs $spacing-sm;
     }
   }
 }
@@ -773,10 +671,6 @@
   .services {
     &__tile {
       border: 2px solid var(--service-color);
-    }
-
-    &__modal {
-      border: 3px solid var(--service-color);
     }
   }
 }
