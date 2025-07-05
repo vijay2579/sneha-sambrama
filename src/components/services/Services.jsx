@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import {
   FaBook,
@@ -331,58 +331,6 @@ const Services = () => {
             ))}
           </div>
         </div>
-
-        {/* Service Modal */}
-        <AnimatePresence>
-          {selectedService && (
-            <motion.div
-              className="services__modal-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedService(null)}
-            >
-              <motion.div
-                className="services__modal"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={(e) => e.stopPropagation()}
-                style={{ "--service-color": selectedService.color }}
-              >
-                <button
-                  className="services__modal-close"
-                  onClick={() => setSelectedService(null)}
-                >
-                  ×
-                </button>
-
-                <div className="services__modal-image">
-                  <div
-                    className="services__modal-bg"
-                    style={{
-                      backgroundImage: `url(${selectedService.image})`,
-                      backgroundColor: selectedService.color + "20",
-                    }}
-                  />
-                </div>
-
-                <div className="services__modal-content">
-                  <div className="services__modal-icon">
-                    {React.createElement(selectedService.icon)}
-                  </div>
-                  <h2>{selectedService.title}</h2>
-                  <h3>{selectedService.subtitle}</h3>
-                  <p>{selectedService.description}</p>
-                  <div className="services__modal-stats">
-                    {selectedService.stats}
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   );

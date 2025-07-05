@@ -11,6 +11,7 @@ import {
   FaUniversity,
   FaUsers,
 } from "react-icons/fa";
+import { BANK_DETAILS } from "../../utils";
 import "./Donate.scss";
 
 const Donate = () => {
@@ -24,11 +25,11 @@ const Donate = () => {
       icon: FaUniversity,
       color: "#4CAF50",
       details: {
-        accountName: "Sneha Sambrama Charity Foundation",
-        accountNumber: "1234567890",
-        ifscCode: "SBIN0001234",
-        bankName: "State Bank of India",
-        branch: "Bangalore Main Branch",
+        accountName: BANK_DETAILS.bank_account_holder_name,
+        accountNumber: BANK_DETAILS.bank_account_number,
+        ifscCode: BANK_DETAILS.bank_ifsc_code,
+        bankName: BANK_DETAILS.bank_name,
+        branch: BANK_DETAILS.bank_branch,
       },
     },
     {
@@ -37,8 +38,8 @@ const Donate = () => {
       icon: FaMobile,
       color: "#2196F3",
       details: {
-        upiId: "snehasambrama@okicici",
-        qrCode: "/qr-code-upi.png",
+        upiId: BANK_DETAILS.bank_upi_id,
+        qrCode: BANK_DETAILS.bank_qr_code,
       },
     },
     {
@@ -47,8 +48,8 @@ const Donate = () => {
       icon: FaMobile,
       color: "#4285F4",
       details: {
-        phoneNumber: "+91 98765 43210",
-        upiId: "snehasambrama@okicici",
+        phoneNumber: BANK_DETAILS.bank_phone_number,
+        upiId: BANK_DETAILS.bank_gpay_id,
       },
     },
     {
@@ -57,8 +58,8 @@ const Donate = () => {
       icon: FaMobile,
       color: "#5F259F",
       details: {
-        phoneNumber: "+91 98765 43210",
-        upiId: "snehasambrama@ybl",
+        phoneNumber: BANK_DETAILS.bank_phone_number,
+        upiId: BANK_DETAILS.bank_phonepay_id,
       },
     },
   ];
@@ -178,8 +179,7 @@ const Donate = () => {
                         <button
                           onClick={() =>
                             copyToClipboard(
-                              "Sneha Sambrama Charity Foundation",
-                              "accountName"
+                              BANK_DETAILS.bank_account_holder_name
                             )
                           }
                           className="donate__copy-btn"
@@ -196,10 +196,13 @@ const Donate = () => {
                     <div className="donate__detail-item">
                       <label>Account Number</label>
                       <div className="donate__detail-value">
-                        <span>1234567890</span>
+                        <span>{BANK_DETAILS.bank_account_number}</span>
                         <button
                           onClick={() =>
-                            copyToClipboard("1234567890", "accountNumber")
+                            copyToClipboard(
+                              BANK_DETAILS.bank_account_number,
+                              "accountNumber"
+                            )
                           }
                           className="donate__copy-btn"
                         >
@@ -215,10 +218,13 @@ const Donate = () => {
                     <div className="donate__detail-item">
                       <label>IFSC Code</label>
                       <div className="donate__detail-value">
-                        <span>SBIN0001234</span>
+                        <span>{BANK_DETAILS.bank_ifsc_code}</span>
                         <button
                           onClick={() =>
-                            copyToClipboard("SBIN0001234", "ifscCode")
+                            copyToClipboard(
+                              BANK_DETAILS.bank_ifsc_code,
+                              "ifscCode"
+                            )
                           }
                           className="donate__copy-btn"
                         >
@@ -233,12 +239,12 @@ const Donate = () => {
 
                     <div className="donate__detail-item">
                       <label>Bank Name</label>
-                      <span>State Bank of India</span>
+                      <span>{BANK_DETAILS.bank_name}</span>
                     </div>
 
                     <div className="donate__detail-item">
                       <label>Branch</label>
-                      <span>Bangalore Main Branch</span>
+                      <span>{BANK_DETAILS.bank_branch}</span>
                     </div>
                   </div>
                 )}
@@ -255,10 +261,10 @@ const Donate = () => {
                     <div className="donate__detail-item">
                       <label>UPI ID</label>
                       <div className="donate__detail-value">
-                        <span>snehasambrama@okicici</span>
+                        <span>{BANK_DETAILS.bank_upi_id}</span>
                         <button
                           onClick={() =>
-                            copyToClipboard("snehasambrama@okicici", "upiId")
+                            copyToClipboard(BANK_DETAILS.bank_upi_id, "upiId")
                           }
                           className="donate__copy-btn"
                         >
@@ -275,10 +281,13 @@ const Donate = () => {
                     <div className="donate__detail-item">
                       <label>Phone Number</label>
                       <div className="donate__detail-value">
-                        <span>+91 98765 43210</span>
+                        <span>{BANK_DETAILS.bank_phone_number}</span>
                         <button
                           onClick={() =>
-                            copyToClipboard("+91 98765 43210", "phoneNumber")
+                            copyToClipboard(
+                              BANK_DETAILS.bank_phone_number,
+                              "phoneNumber"
+                            )
                           }
                           className="donate__copy-btn"
                         >
@@ -296,15 +305,15 @@ const Donate = () => {
                       <div className="donate__detail-value">
                         <span>
                           {selectedMethod === "gpay"
-                            ? "snehasambrama@okicici"
-                            : "snehasambrama@ybl"}
+                            ? BANK_DETAILS.bank_gpay_id
+                            : BANK_DETAILS.bank_phonepay_id}
                         </span>
                         <button
                           onClick={() =>
                             copyToClipboard(
                               selectedMethod === "gpay"
-                                ? "snehasambrama@okicici"
-                                : "snehasambrama@ybl",
+                                ? BANK_DETAILS.bank_gpay_id
+                                : BANK_DETAILS.bank_phonepay_id,
                               "mobileUpiId"
                             )
                           }
@@ -335,7 +344,7 @@ const Donate = () => {
           <motion.div className="donate__stat-item" variants={itemVariants}>
             <FaUsers className="donate__stat-icon" />
             <div className="donate__stat-content">
-              <h3>10,000+</h3>
+              <h3>10,00+</h3>
               <p>Lives Impacted</p>
             </div>
           </motion.div>
@@ -343,7 +352,7 @@ const Donate = () => {
           <motion.div className="donate__stat-item" variants={itemVariants}>
             <FaHandHoldingHeart className="donate__stat-icon" />
             <div className="donate__stat-content">
-              <h3>₹50L+</h3>
+              <h3>₹5L+</h3>
               <p>Funds Raised</p>
             </div>
           </motion.div>
@@ -351,7 +360,7 @@ const Donate = () => {
           <motion.div className="donate__stat-item" variants={itemVariants}>
             <FaGlobe className="donate__stat-icon" />
             <div className="donate__stat-content">
-              <h3>25+</h3>
+              <h3>10+</h3>
               <p>Communities Served</p>
             </div>
           </motion.div>
