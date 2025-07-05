@@ -18,9 +18,23 @@
   }
 
   &__content {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-3xl;
+    align-items: center;
+    margin-top: $spacing-3xl;
+
+    @include responsive(md) {
+      grid-template-columns: 1fr;
+      gap: $spacing-2xl;
+      margin-top: $spacing-2xl;
+    }
+
+    @include responsive(sm) {
+      gap: $spacing-xl;
+      margin-top: $spacing-xl;
+      padding: 0 2rem;
+    }
   }
 
   // Header Section
@@ -80,7 +94,6 @@
 
     @include responsive(sm) {
       margin-bottom: $spacing-xl;
-      padding: 0 1rem;
     }
   }
 

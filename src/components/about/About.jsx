@@ -232,11 +232,11 @@ const About = () => {
                 }}
               >
                 <div className="about__team-img-wrapper about__team-img-wrapper--large">
-                  <img src={tejasvi} alt="Shri Tejasvi Kattimani T R" />
+                  <img src={tejasvi} alt="Sri Tejasvi Kattimani T R" />
                 </div>
                 <div className="about__team-info about__team-info--large">
                   <div className="about__team-name">
-                    Shri. Tejasvi Kattimani T R
+                    Sri. Tejasvi Kattimani T. R.
                   </div>
                   <div className="about__team-role">President</div>
                 </div>
