@@ -210,6 +210,7 @@
     color: $secondary-color;
     margin-bottom: $spacing-md;
     transition: $transition-normal;
+    color: $special-color;
 
     @include responsive(md) {
       font-size: $font-size-3xl;
@@ -350,6 +351,7 @@
     color: $secondary-color;
     margin-bottom: $spacing-md;
     transition: $transition-normal;
+    color: $special-color;
 
     @include responsive(md) {
       font-size: $font-size-3xl;

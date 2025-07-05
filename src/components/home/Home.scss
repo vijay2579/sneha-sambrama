@@ -82,17 +82,17 @@
 
       .home-content__icon {
         transform: scale(1.1) rotate(5deg);
-        background: $special-color;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        color: $primary-color;
       }
     }
   }
 
   &__icon {
     font-size: $font-size-4xl;
-    color: $primary-color;
+    color: $special-color;
     margin-bottom: $spacing-md;
     display: block;
     filter: drop-shadow(0 2px 4px rgba($black, 0.1));

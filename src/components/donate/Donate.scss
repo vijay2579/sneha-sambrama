@@ -214,6 +214,11 @@
     color: white;
     margin: 0 auto 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: $special-color;
+    background-color: #FFF !important;
+    &:hover {
+      color: $primary-color;
+    }
   }
 
   &__method-card h4 {

@@ -8,6 +8,7 @@ import {
   FaPhone,
   FaUser,
 } from "react-icons/fa";
+import { ADDRESS, EMAIL, PHONE } from "../../utils";
 import "./Contact.scss";
 
 const Contact = () => {
@@ -98,7 +99,7 @@ const Contact = () => {
               </div>
               <div className="contact__info-content">
                 <h3>Our Location</h3>
-                <p>123 Charity Street, Bangalore, Karnataka 560001</p>
+                <p>{ADDRESS}</p>
               </div>
             </motion.div>
 
@@ -108,7 +109,7 @@ const Contact = () => {
               </div>
               <div className="contact__info-content">
                 <h3>Phone Number</h3>
-                <p>+91 98765 43210</p>
+                <p>{PHONE}</p>
               </div>
             </motion.div>
 
@@ -118,7 +119,7 @@ const Contact = () => {
               </div>
               <div className="contact__info-content">
                 <h3>Email Address</h3>
-                <p>info@snehasambrama.org</p>
+                <p>{EMAIL}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -233,12 +234,12 @@ const Contact = () => {
                   </span>
                 )}
               </motion.button>
-    </form>
+            </form>
           </motion.div>
         </div>
       </div>
-  </section>
-);
+    </section>
+  );
 };
 
 export default Contact;

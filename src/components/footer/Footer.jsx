@@ -12,6 +12,7 @@ import {
   FaPhone,
   FaTwitter,
 } from "react-icons/fa";
+import { ADDRESS, EMAIL, PHONE, WEBSITE_URL } from "../../utils";
 import "./Footer.scss";
 
 const Footer = () => {
@@ -139,21 +140,20 @@ const Footer = () => {
                 <div className="footer__contact-item">
                   <FaMapMarkerAlt className="footer__contact-icon" />
                   <div>
-                    <p>123 Charity Street</p>
-                    <p>Bangalore, Karnataka 560001</p>
+                    <p>{ADDRESS}</p>
                   </div>
                 </div>
                 <div className="footer__contact-item">
                   <FaPhone className="footer__contact-icon" />
-                  <p>+91 98765 43210</p>
+                  <p>{PHONE}</p>
                 </div>
                 <div className="footer__contact-item">
                   <FaEnvelope className="footer__contact-icon" />
-                  <p>info@snehasambrama.com</p>
+                  <p>{EMAIL}</p>
                 </div>
                 <div className="footer__contact-item">
                   <FaGlobe className="footer__contact-icon" />
-                  <p>www.snehasambrama.com</p>
+                  <p>{WEBSITE_URL}</p>
                 </div>
               </div>
             </motion.div>
@@ -198,4 +198,3 @@ const Footer = () => {
 };
 
 export default Footer;
- 
