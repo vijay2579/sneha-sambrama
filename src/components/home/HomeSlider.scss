@@ -21,8 +21,8 @@
     }
   
     @include responsive(sm) {
-      height: 52.5vh;
-      margin: 10px;
+      height: auto;
+      margin: 0;
     }
   
     &__container {
