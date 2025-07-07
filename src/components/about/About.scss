@@ -33,7 +33,7 @@
     }
 
     @include responsive(sm) {
-      margin-bottom: $spacing-xl;
+      margin-bottom: 1rem;
     }
   }
 
@@ -872,5 +872,8 @@
   .about__team-featured-vertical .about__team-small-grid {
     font-size: 0.75rem;
     padding: 0 1rem;
+  }
+  .about {
+    padding: 1rem 0 !important;
   }
 } 
