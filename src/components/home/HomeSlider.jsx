@@ -14,36 +14,63 @@ const sliderImages = [hero3, hero4, hero6, hero7, hero8, hero9, hero10];
 
 const HomeSlider = () => {
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0); // 1 for next, -1 for prev
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setDirection(1);
       setCurrent((prev) => (prev + 1) % sliderImages.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   const nextSlide = () => {
+    setDirection(1);
     setCurrent((prev) => (prev + 1) % sliderImages.length);
   };
 
   const prevSlide = () => {
+    setDirection(-1);
     setCurrent(
       (prev) => (prev - 1 + sliderImages.length) % sliderImages.length
     );
   };
 
+  const variants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0,
+      position: "absolute",
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      position: "relative",
+    },
+    exit: (dir) => ({
+      x: dir > 0 ? -300 : 300,
+      opacity: 0,
+      position: "absolute",
+    }),
+  };
+
   return (
     <div className="home-slider">
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={current}
           src={sliderImages[current]}
           alt={`Slide ${current + 1}`}
           className="home-slider__image"
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.96 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 500, damping: 40 },
+            opacity: { duration: 0.4 },
+          }}
         />
       </AnimatePresence>
 
@@ -71,7 +98,10 @@ const HomeSlider = () => {
             className={`home-slider__dot${
               idx === current ? " home-slider__dot--active" : ""
             }`}
-            onClick={() => setCurrent(idx)}
+            onClick={() => {
+              setDirection(idx > current ? 1 : -1);
+              setCurrent(idx);
+            }}
             aria-label={`Go to slide ${idx + 1}`}
           />
         ))}
