@@ -2,11 +2,16 @@
 @import '../../styles/variables.scss';
 
 .gallery {
-  padding: 80px 0;
+  padding: 40px 0;
   background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  min-height: 0;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 
   .container {
     max-width: 1200px;
@@ -17,6 +22,9 @@
   &__header {
     text-align: center;
     margin-bottom: 1rem;
+    @media (max-width: 768px) {
+      margin-bottom: 0;
+    }
 
     .gallery__title {
       font-size: 3rem;
@@ -24,9 +32,10 @@
       color: $primary-color;
       margin-bottom: 20px;
       text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-
       @media (max-width: 768px) {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
       }
     }
   }
@@ -45,22 +54,15 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 15px;
-    padding: 20px;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 10px;
 
     @media (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 12px;
-      padding: 15px;
-    }
-
-    @media (max-width: 480px) {
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(6, 1fr);
-      gap: 10px;
-      padding: 10px;
+      grid-template-rows: 1fr;
+      gap: 8px;
+      padding: 6px;
     }
   }
 
@@ -70,10 +72,10 @@
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     background: white;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/2;
 
     @media (max-width: 768px) {
-      aspect-ratio: 3/2;
+      aspect-ratio: 4/3;
     }
   }
 

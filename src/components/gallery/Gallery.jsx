@@ -59,12 +59,34 @@ const galleryImages = [
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0); // 1 for next, -1 for prev
-  const imagesPerSlide = 6;
+  const [imagesPerSlide, setImagesPerSlide] = useState(3);
+  const [intervalId, setIntervalId] = useState(null);
+
+  useEffect(() => {
+    // Responsive images per slide
+    const updateImagesPerSlide = () => {
+      if (window.innerWidth <= 768) {
+        setImagesPerSlide(1);
+      } else {
+        setImagesPerSlide(3);
+      }
+    };
+    updateImagesPerSlide();
+    window.addEventListener("resize", updateImagesPerSlide);
+    return () => window.removeEventListener("resize", updateImagesPerSlide);
+  }, []);
+
   const totalSlides = Math.ceil(galleryImages.length / imagesPerSlide);
 
   useEffect(() => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  }, [totalSlides]);
+    if (intervalId) clearInterval(intervalId);
+    const id = setInterval(() => {
+      setDirection(1);
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 2000);
+    setIntervalId(id);
+    return () => clearInterval(id);
+  }, [imagesPerSlide, totalSlides]);
 
   const getCurrentSlideImages = () => {
     const startIndex = currentSlide * imagesPerSlide;
