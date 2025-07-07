@@ -157,6 +157,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr;
       gap: $spacing-md;
+      padding: 0 1rem;
     }
   }
 
@@ -297,6 +298,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr;
       gap: $spacing-md;
+      padding: 0 1rem;
     }
   }
 
@@ -663,7 +665,7 @@
     margin-bottom: $spacing-xs;
     text-shadow: 0 2px 4px rgba($black, 0.3);
     @include responsive(sm) {
-      font-size: $font-size-base;
+      font-size: 0.75rem;
     }
   }
 
@@ -739,7 +741,7 @@
     @include responsive(sm) {
       grid-template-columns: 1fr 1fr;
       gap: $spacing-sm;
-      padding: 0;
+      padding: 0 1rem;
     }
   }
 
@@ -856,5 +858,12 @@
     &__value-icon {
       transition: none;
     }
+  }
+} 
+
+@media (max-width: 768px) {
+  .about__team-featured-vertical .about__team-small-grid {
+    font-size: 0.75rem;
+    padding: 0 1rem;
   }
 } 

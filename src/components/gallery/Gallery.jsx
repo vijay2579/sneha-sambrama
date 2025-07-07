@@ -127,88 +127,86 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="gallery">
-      <div className="container">
-        <motion.div
-          className="gallery__header"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+    <div className="container">
+      <motion.div
+        className="gallery__header"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="gallery__title">Our Gallery</h2>
+      </motion.div>
+
+      <div className="gallery__slider">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={currentSlide}
+            className="gallery__slide"
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 500, damping: 40 },
+              opacity: { duration: 0.4 },
+            }}
+          >
+            <div className="gallery__grid">
+              {getCurrentSlideImages().map((image, index) => (
+                <motion.div
+                  key={index}
+                  className="gallery__item"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <img
+                    src={image}
+                    alt={`Gallery image ${
+                      currentSlide * imagesPerSlide + index + 1
+                    }`}
+                    className="gallery__image"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Arrows */}
+        <button
+          className="gallery__arrow gallery__arrow--prev"
+          onClick={prevSlide}
+          aria-label="Previous slide"
         >
-          <h2 className="gallery__title">Our Gallery</h2>
-        </motion.div>
+          <FaChevronLeft />
+        </button>
 
-        <div className="gallery__slider">
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              key={currentSlide}
-              className="gallery__slide"
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 500, damping: 40 },
-                opacity: { duration: 0.4 },
-              }}
-            >
-              <div className="gallery__grid">
-                {getCurrentSlideImages().map((image, index) => (
-                  <motion.div
-                    key={index}
-                    className="gallery__item"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <img
-                      src={image}
-                      alt={`Gallery image ${
-                        currentSlide * imagesPerSlide + index + 1
-                      }`}
-                      className="gallery__image"
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+        <button
+          className="gallery__arrow gallery__arrow--next"
+          onClick={nextSlide}
+          aria-label="Next slide"
+        >
+          <FaChevronRight />
+        </button>
 
-          {/* Navigation Arrows */}
-          <button
-            className="gallery__arrow gallery__arrow--prev"
-            onClick={prevSlide}
-            aria-label="Previous slide"
-          >
-            <FaChevronLeft />
-          </button>
-
-          <button
-            className="gallery__arrow gallery__arrow--next"
-            onClick={nextSlide}
-            aria-label="Next slide"
-          >
-            <FaChevronRight />
-          </button>
-
-          {/* Navigation Dots */}
-          <div className="gallery__dots">
-            {Array.from({ length: totalSlides }, (_, index) => (
-              <button
-                key={index}
-                className={`gallery__dot ${
-                  index === currentSlide ? "gallery__dot--active" : ""
-                }`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+        {/* Navigation Dots */}
+        <div className="gallery__dots">
+          {Array.from({ length: totalSlides }, (_, index) => (
+            <button
+              key={index}
+              className={`gallery__dot ${
+                index === currentSlide ? "gallery__dot--active" : ""
+              }`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

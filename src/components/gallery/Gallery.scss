@@ -1,6 +1,12 @@
 // Import variables and mixins
 @import '../../styles/variables.scss';
 
+#gallery {
+  width: 100%;
+  .container {
+    width: 100%;
+  }
+}
 .gallery {
   padding: 40px 0;
   background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
@@ -43,8 +49,9 @@
   &__slider {
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   &__slide {
