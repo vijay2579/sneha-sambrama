@@ -22,7 +22,6 @@
   }
 
   .container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
@@ -31,7 +30,7 @@
 
   &__header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 1rem;
 
     .contact__title {
       font-size: 2.5rem;
