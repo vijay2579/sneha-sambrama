@@ -58,6 +58,7 @@ const galleryImages = [
 
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0); // 1 for next, -1 for prev
   const imagesPerSlide = 6;
   const totalSlides = Math.ceil(galleryImages.length / imagesPerSlide);
 
@@ -71,15 +72,36 @@ const Gallery = () => {
   };
 
   const goToSlide = (slideIndex) => {
+    setDirection(slideIndex > currentSlide ? 1 : -1);
     setCurrentSlide(slideIndex);
   };
 
   const nextSlide = () => {
+    setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
   };
 
   const prevSlide = () => {
+    setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const variants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0,
+      position: "absolute",
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      position: "relative",
+    },
+    exit: (dir) => ({
+      x: dir > 0 ? -300 : 300,
+      opacity: 0,
+      position: "absolute",
+    }),
   };
 
   return (
@@ -96,14 +118,19 @@ const Gallery = () => {
         </motion.div>
 
         <div className="gallery__slider">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={currentSlide}
               className="gallery__slide"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 500, damping: 40 },
+                opacity: { duration: 0.4 },
+              }}
             >
               <div className="gallery__grid">
                 {getCurrentSlideImages().map((image, index) => (

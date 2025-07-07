@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import {
   FaChevronLeft,
@@ -12,6 +12,7 @@ import "./Services.scss";
 const Services = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [serviceCarousels, setServiceCarousels] = useState({});
+  const [serviceDirections, setServiceDirections] = useState({}); // Track direction per service
 
   // Service data structure with dynamic image imports
   const services = [
@@ -106,6 +107,7 @@ const Services = () => {
 
   // Individual service carousel controls
   const nextServiceSlide = (serviceId) => {
+    setServiceDirections((prev) => ({ ...prev, [serviceId]: 1 }));
     setServiceCarousels((prev) => ({
       ...prev,
       [serviceId]:
@@ -115,6 +117,7 @@ const Services = () => {
   };
 
   const prevServiceSlide = (serviceId) => {
+    setServiceDirections((prev) => ({ ...prev, [serviceId]: -1 }));
     const service = services.find((s) => s.id === serviceId);
     setServiceCarousels((prev) => ({
       ...prev,
@@ -196,6 +199,24 @@ const Services = () => {
               const IconComponent = service.icon;
               const currentImageIndex = serviceCarousels[service.id] || 0;
               const currentImage = service.carouselImages[currentImageIndex];
+              const direction = serviceDirections[service.id] || 0;
+              const imageVariants = {
+                enter: (dir) => ({
+                  x: dir > 0 ? 300 : -300,
+                  opacity: 0,
+                  position: "absolute",
+                }),
+                center: {
+                  x: 0,
+                  opacity: 1,
+                  position: "relative",
+                },
+                exit: (dir) => ({
+                  x: dir > 0 ? -300 : 300,
+                  opacity: 0,
+                  position: "absolute",
+                }),
+              };
 
               // Debug logging for mobile
               console.log(
@@ -220,28 +241,40 @@ const Services = () => {
                       }}
                     >
                       {/* Add actual img element for better mobile support */}
-                      <img
-                        src={currentImage}
-                        alt={`${service.title} - Image ${
-                          currentImageIndex + 1
-                        }`}
-                        className="services__tile-img"
-                        onLoad={() =>
-                          console.log(
-                            `Image loaded successfully: ${currentImage}`
-                          )
-                        }
-                        onError={(e) => {
-                          console.error(
-                            `Failed to load image: ${currentImage}`
-                          );
-                          e.target.style.display = "none";
-                          const fallback = e.target.nextElementSibling;
-                          if (fallback) {
-                            fallback.style.display = "block";
+                      <AnimatePresence initial={false} custom={direction}>
+                        <motion.img
+                          key={currentImageIndex}
+                          src={currentImage}
+                          alt={`${service.title} - Image ${
+                            currentImageIndex + 1
+                          }`}
+                          className="services__tile-img"
+                          custom={direction}
+                          variants={imageVariants}
+                          initial="enter"
+                          animate="center"
+                          exit="exit"
+                          transition={{
+                            x: { type: "spring", stiffness: 500, damping: 40 },
+                            opacity: { duration: 0.4 },
+                          }}
+                          onLoad={() =>
+                            console.log(
+                              `Image loaded successfully: ${currentImage}`
+                            )
                           }
-                        }}
-                      />
+                          onError={(e) => {
+                            console.error(
+                              `Failed to load image: ${currentImage}`
+                            );
+                            e.target.style.display = "none";
+                            const fallback = e.target.nextElementSibling;
+                            if (fallback) {
+                              fallback.style.display = "block";
+                            }
+                          }}
+                        />
+                      </AnimatePresence>
                       <div
                         className="services__tile-fallback"
                         style={{
@@ -294,6 +327,11 @@ const Services = () => {
                             }`}
                             onClick={(e) => {
                               e.stopPropagation();
+                              setServiceDirections((prev) => ({
+                                ...prev,
+                                [service.id]:
+                                  index > currentImageIndex ? 1 : -1,
+                              }));
                               setServiceCarousels((prev) => ({
                                 ...prev,
                                 [service.id]: index,
