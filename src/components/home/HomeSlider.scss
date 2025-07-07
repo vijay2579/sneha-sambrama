@@ -7,22 +7,21 @@
   .home-slider {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 75vh;
     overflow: hidden;
-    background: linear-gradient(135deg, $background-light 0%, $background-lighter 100%);
-    border-radius: 20px;
+    background: #fff;
     box-shadow: 
       0 25px 50px rgba(0, 0, 0, 0.25),
       0 15px 30px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.1);
   
     @include responsive(md) {
-      height: 80vh;
+      height: 60vh;
       margin: 15px;
     }
   
     @include responsive(sm) {
-      height: 70vh;
+      height: 52.5vh;
       margin: 10px;
     }
   
@@ -45,13 +44,18 @@
     }
   
     &__image {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      /* Remove forced width/height and cover fit to use original image size */
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100vh;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      background: none;
       position: relative;
-      border-radius: 20px;
+      /* Remove border-radius for square corners */
+      border-radius: 0;
       box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.3),
         0 10px 20px rgba(0, 0, 0, 0.2),
@@ -75,7 +79,8 @@
           rgba($black, 0.4) 100%
         );
         z-index: 1;
-        border-radius: 20px;
+        /* Remove border-radius for overlays */
+        border-radius: 0;
       }
 
       &::after {
@@ -91,7 +96,8 @@
           transparent 70%
         );
         z-index: 2;
-        border-radius: 20px;
+        /* Remove border-radius for overlays */
+        border-radius: 0;
         pointer-events: none;
       }
     }

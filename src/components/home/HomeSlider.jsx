@@ -2,14 +2,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import hero6 from "../../assets/images/hero/her06.jpeg";
-import hero1 from "../../assets/images/hero/hero1.jpeg";
-import hero2 from "../../assets/images/hero/hero2.jpg";
+import hero10 from "../../assets/images/hero/hero10.jpeg";
 import hero3 from "../../assets/images/hero/hero3.jpeg";
 import hero4 from "../../assets/images/hero/hero4.jpeg";
-import hero5 from "../../assets/images/hero/hero5.jpeg";
+import hero7 from "../../assets/images/hero/hero7.jpeg";
+import hero8 from "../../assets/images/hero/hero8.jpeg";
+import hero9 from "../../assets/images/hero/hero9.jpeg";
 import "./HomeSlider.scss";
 
-const sliderImages = [hero1, hero2, hero3, hero4, hero5, hero6];
+const sliderImages = [hero3, hero4, hero6, hero7, hero8, hero9, hero10];
 
 const HomeSlider = () => {
   const [current, setCurrent] = useState(0);
